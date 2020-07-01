@@ -9,22 +9,15 @@
     <i18n:registerTranslations directory="locales" />
 
     <five:registerPackage package="." initialize=".initialize" />
-    
-    <include package="five.grok" />
+
     <include package="plone.api" />
+    <include package="plone.app.dexterity" />
 
     <include package=".browser" />
     <include package=".contents" />
 
-    <grok:grok package="." />
-
-    <genericsetup:registerProfile
-        name="default"
-        title="imio.urban.core"
-        directory="profiles/default"
-        description="Installs the imio.urban.core add-on."
-        provides="Products.GenericSetup.interfaces.EXTENSION"
-        />
+    <include file="import_steps.zcml" />
+    <include file="profiles.zcml" />
 
     <genericsetup:importStep
         name="imio.urban.core-postInstall"
