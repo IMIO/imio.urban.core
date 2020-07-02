@@ -20,7 +20,7 @@ class ParcelEditForm(edit.DefaultEditForm):
 
 class ParcelView(view.DefaultView):
     """
-    Parcel display view to be called with an overlay in z3c.table listings.
+    Parcel display view to be called with an overlay in parcel listings.
     """
 
     def __init__(self, context, request):

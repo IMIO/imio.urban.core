@@ -84,7 +84,7 @@ class TestParcel(unittest.TestCase):
         # add a parcel1, the index should now contain this parcel reference
         parcel_1 = api.content.create(
             container=container, type='Parcel', id='parcel1',
-            division='A', section='B', radical='6', exposant='D'
+            division=u'A', section=u'B', radical=u'6', exposant=u'D'
         )
         container_brain = catalog(id=container_id)[0]
         self.assertIn(parcel_1.get_capakey(), container_brain.parcelInfosIndex)
@@ -92,7 +92,7 @@ class TestParcel(unittest.TestCase):
         # add a parcel2, the index should now contain the two parcel references
         parcel_2 = api.content.create(
             container=container, type='Parcel', id='parcel2',
-            division='AA', section='B', radical='69', exposant='E'
+            division=u'AA', section=u'B', radical=u'69', exposant=u'E'
         )
         container_brain = catalog(id=container_id)[0]
         self.assertIn(parcel_1.get_capakey(), container_brain.parcelInfosIndex)
@@ -107,7 +107,7 @@ class TestParcel(unittest.TestCase):
 
         # modify parcel2 capakey, the index should be updated on the container
         old_capakey = parcel_2.get_capakey()
-        parcel_2.puissance = '69'
+        parcel_2.puissance = u'69'
         self.assertNotEqual(old_capakey, parcel_2.get_capakey())
         notify(ObjectModifiedEvent(parcel_2))
         container_brain = catalog(id=container_id)[0]
@@ -119,7 +119,7 @@ class TestParcel(unittest.TestCase):
         licence = self.licence
         parcel = api.content.create(
             container=licence, type='Parcel', id='parcel1',
-            division='A', section='B', radical='6', exposant='D'
+            division=u'A', section=u'B', radical=u'6', exposant=u'D'
         )
         # isOfficialParcel should be False
         self.assertEqual(parcel.isOfficialParcel, False)
@@ -128,7 +128,7 @@ class TestParcel(unittest.TestCase):
         licence = self.licence
         parcel = api.content.create(
             container=licence, type='Parcel', id='parcel1',
-            division='A', section='B', radical='6', exposant='D'
+            division=u'A', section=u'B', radical=u'6', exposant=u'D'
         )
         parcel_view = parcel.restrictedTraverse('view')
         view_result = parcel_view()
@@ -139,7 +139,7 @@ class TestParcel(unittest.TestCase):
         licence = self.licence
         parcel = api.content.create(
             container=licence, type='Parcel', id='parcel1',
-            division='69696', section='B', radical='6', exposant='D'
+            division=u'69696', section=u'B', radical=u'6', exposant=u'D'
         )
         # divisionCode should always return the value contained in the field division.
         self.assertEqual(parcel.getDivisionCode(), parcel.getDivision())
@@ -150,17 +150,26 @@ class TestParcel(unittest.TestCase):
         self.assertEquals(parcelling.Title(), 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005)')
         # after adding a parcel1, title should be updated with the base
         # references  of this parcel (here:  A, B, C but not D)
-        api.content.create(container=parcelling, type='Parcel', id='parcel1', division='A', section='B', radical='6', exposant='D')
+        api.content.create(
+            container=parcelling, type='Parcel', id='parcel1',
+            division=u'A', section=u'B', radical=u'6', exposant=u'D'
+        )
         self.assertEquals(parcelling.Title(), 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005 - "A B 6")')
 
         # after adding a parcel2 with the same base refs, the title
         # should not change
-        api.content.create(container=parcelling, type='Parcel', id='parcel2', division='A', section='B', radical='6', exposant='E')
+        api.content.create(
+            container=parcelling, type='Parcel', id='parcel2',
+            division=u'A', section=u'B', radical=u'6', exposant=u'E'
+        )
         self.assertEquals(parcelling.Title(), 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005 - "A B 6")')
 
         # after adding a parcel3 with different base refs, the title
         # should be updated
-        parcel_3 = api.content.create(container=parcelling, type='Parcel', id='parcel3', division='AA', section='BB', radical='69', exposant='D')
+        parcel_3 = api.content.create(
+            container=parcelling, type='Parcel', id='parcel3',
+            division=u'AA', section=u'BB', radical=u'69', exposant=u'D'
+        )
         self.assertEquals(parcelling.Title(), 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005 - "AA BB 69", "A B 6")')
 
         # we remove parcel1 and parcel2, title should change to only
@@ -169,7 +178,7 @@ class TestParcel(unittest.TestCase):
         self.assertEquals(parcelling.Title(), 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005 - "AA BB 69")')
 
         # modify parcel3, parcelling title should be updated
-        parcel_3.division = 'AAA'
+        parcel_3.division = u'AAA'
         notify(ObjectModifiedEvent(parcel_3))
         self.assertEquals(parcelling.Title(), 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005 - "AAA BB 69")')
         # remove created parcels to not impact other tests
