@@ -19,7 +19,6 @@ class IParcel(model.Schema):
     form.widget('division', SelectWidget)
     division = schema.Choice(
         title=_(u'Division'),
-        description=_(u'urban_label_division'),
         vocabulary='urban.vocabularies.division_names',
         required=True,
     )
@@ -27,42 +26,36 @@ class IParcel(model.Schema):
     form.widget('section', TextWidget)
     section = schema.TextLine(
         title=_(u'Section'),
-        description=_(u'urban_label_section'),
         required=True,
     )
 
     form.widget('radical', TextWidget)
     radical = schema.TextLine(
         title=_(u'Radical'),
-        description=_(u'urban_label_radical'),
         required=False,
     )
 
     form.widget('bis', TextWidget)
     bis = schema.TextLine(
         title=_(u'Bis'),
-        description=_(u'urban_label_bis'),
         required=False,
     )
 
     form.widget('exposant', TextWidget)
     exposant = schema.TextLine(
         title=_(u'Exposant'),
-        description=_(u'urban_label_exposant'),
         required=False,
     )
 
     form.widget('puissance', TextWidget)
     puissance = schema.TextLine(
         title=_(u'Puissance'),
-        description=_(u'urban_label_puissance'),
         required=False,
     )
 
     form.widget('partie', SingleCheckBoxWidget)
     partie = schema.Bool(
         title=_(u'Partie'),
-        description=_(u'urban_label_partie'),
         default=False,
         required=False,
     )
@@ -70,7 +63,6 @@ class IParcel(model.Schema):
     form.omitted('isOfficialParcel')
     isOfficialParcel = schema.Bool(
         title=_(u'Isofficialparcel'),
-        description=_(u'urban_label_isOfficialParcel'),
         default=False,
         required=False,
     )
