@@ -21,11 +21,11 @@
  </property>
  <property name="default_view_fallback">False</property>
  <property name="add_permission">imio.urban.add_parcel</property>
- <property name="klass">imio.urban.core.contents.parcel.content.Parcel</property>
+ <property name="klass">imio.urban.core.contents.parcel.Parcel</property>
  <property name="behaviors">
   <element value="plone.app.lockingbehavior.behaviors.ILocking" />
  </property>
- <property name="schema">imio.urban.core.contents.parcel.interfaces.IParcel</property>
+ <property name="schema">imio.urban.core.contents.parcel.IParcel</property>
  <property name="schema_policy">dexterity</property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="index.html" to="(dynamic view)"/>

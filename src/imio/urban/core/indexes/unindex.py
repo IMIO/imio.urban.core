@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from imio.urban.core.contents.parcel.interfaces import IParcel
+from imio.urban.core.contents.parcel.content import IParcel
 
 from plone.indexer import indexer
 

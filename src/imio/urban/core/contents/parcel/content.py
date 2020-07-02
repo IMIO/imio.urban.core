@@ -1,15 +1,87 @@
 # -*- coding: utf-8 -*-
 
-from imio.urban.core.contents.parcel.interfaces import IParcel
+from imio.urban.core import _
 
 from plone import api
+from plone.autoform import directives as form
 from plone.dexterity.content import Item
+from plone.supermodel import model
 
 from Products.urban import services
+
+from z3c.form.browser.checkbox import SingleCheckBoxWidget
+from z3c.form.browser.select import SelectWidget
+from z3c.form.browser.text import TextWidget
 
 from zope.component import getUtility
 from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
+from zope import schema
+
+
+class IParcel(model.Schema):
+    """
+    Parcel dexterity schema.
+    """
+
+    form.widget('division', SelectWidget)
+    division = schema.Choice(
+        title=_(u'Division'),
+        vocabulary='urban.vocabularies.division_names',
+        required=True,
+    )
+
+    form.widget('section', TextWidget)
+    section = schema.TextLine(
+        title=_(u'Section'),
+        required=True,
+    )
+
+    form.widget('radical', TextWidget)
+    radical = schema.TextLine(
+        title=_(u'Radical'),
+        required=False,
+    )
+
+    form.widget('bis', TextWidget)
+    bis = schema.TextLine(
+        title=_(u'Bis'),
+        required=False,
+    )
+
+    form.widget('exposant', TextWidget)
+    exposant = schema.TextLine(
+        title=_(u'Exposant'),
+        required=False,
+    )
+
+    form.widget('puissance', TextWidget)
+    puissance = schema.TextLine(
+        title=_(u'Puissance'),
+        required=False,
+    )
+
+    form.widget('partie', SingleCheckBoxWidget)
+    partie = schema.Bool(
+        title=_(u'Partie'),
+        default=False,
+        required=False,
+    )
+
+    form.omitted('isOfficialParcel')
+    isOfficialParcel = schema.Bool(
+        title=_(u'Isofficialparcel'),
+        default=False,
+        required=False,
+    )
+
+    form.widget('outdated', SingleCheckBoxWidget)
+    outdated = schema.Bool(
+        title=_(u'Outdated'),
+        description=_(u'urban_label_outdated'),
+        default=False,
+        required=False,
+    )
 
 
 @implementer(IParcel)
