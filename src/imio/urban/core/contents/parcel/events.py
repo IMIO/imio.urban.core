@@ -34,7 +34,7 @@ def update_bound_licences_parcelindex(parcel, events):
     If ticket or inspection refers to the parcel licence, update their
     parcelInfosIndex as well when the parcel is modified/deleted/created.
     """
-    licence = parcel.aq_parent
+    licence = parcel.aq_inner.aq_parent
     licenceEvents._updateBoundLicencesIndexes(
         licence, events, indexes=['parcelInfosIndex']
     )

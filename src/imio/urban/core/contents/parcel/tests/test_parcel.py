@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Setup/installation tests for Parcel."""
 
-from Products.urban.testing import URBAN_TESTS_CONFIG
+from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
 from Products.urban import utils
 
 from imio.urban.core.testing import IntegrationTestCase
@@ -35,7 +35,7 @@ class TestInstall(IntegrationTestCase):
 
 class TestParcel(unittest.TestCase):
 
-    layer = URBAN_TESTS_CONFIG
+    layer = URBAN_TESTS_CONFIG_FUNCTIONAL
 
     def setUp(self):
         portal = self.layer['portal']
@@ -45,18 +45,15 @@ class TestParcel(unittest.TestCase):
         default_user = self.layer.default_user
         login(self.portal, default_user)
         # create a test CODT_BuildLicence
-        content_type = 'CODT_BuildLicence'
-        licence_folder = utils.getLicenceFolder(content_type)
-        testlicence_id = 'test_{}'.format(content_type.lower())
-        licence_folder.invokeFactory(content_type, id=testlicence_id)
-        test_licence = getattr(licence_folder, testlicence_id)
-        self.licence = test_licence
+        self.licence = self._create_test_licence('CODT_BuildLicence')
         transaction.commit()
 
-    def tearDown(self):
-        with api.env.adopt_roles(['Manager']):
-            api.content.delete(self.licence)
-        transaction.commit()
+    def _create_test_licence(self, portal_type, **args):
+        licence_folder = utils.getLicenceFolder(portal_type)
+        testlicence_id = 'test_{}'.format(portal_type.lower())
+        licence_folder.invokeFactory(portal_type, id=testlicence_id)
+        test_licence = getattr(licence_folder, testlicence_id)
+        return test_licence
 
     def test_parcels_unindexed_from_catalog(self):
         catalog = api.portal.get_tool('portal_catalog')
@@ -112,8 +109,74 @@ class TestParcel(unittest.TestCase):
         notify(ObjectModifiedEvent(parcel_2))
         container_brain = catalog(id=container_id)[0]
         self.assertIn(parcel_2.get_capakey(), container_brain.parcelInfosIndex)
-        # remove parcel_2 to not impact other tests
-        api.content.delete(parcel_2)
+
+    def test_parcel_indexing_on_boundlicences(self):
+        licence = self.licence
+        inspection = self._create_test_licence('Inspection')
+        ticket = self._create_test_licence('Ticket')
+        inspection.setBound_licences([licence])
+        ticket.setBound_inspection(inspection)
+        catalog = api.portal.get_tool('portal_catalog')
+
+        licence_brain = catalog(UID=licence.UID())[0]
+        inspection_brain = catalog(UID=inspection.UID())[0]
+        ticket_brain = catalog(UID=ticket.UID())[0]
+        # so far, the index should be empty as  this licence contains no parcel
+        self.assertFalse(licence_brain.parcelInfosIndex)
+        self.assertFalse(inspection_brain.parcelInfosIndex)
+        self.assertFalse(ticket_brain.parcelInfosIndex)
+
+        # add a parcel1, the index should now contain this parcel reference
+        parcel_1 = api.content.create(
+            container=licence, type='Parcel', id='parcel1',
+            division=u'A', section=u'B', radical=u'6', exposant=u'D'
+        )
+        licence_brain = catalog(UID=licence.UID())[0]
+        inspection_brain = catalog(UID=inspection.UID())[0]
+        ticket_brain = catalog(UID=ticket.UID())[0]
+        self.assertIn(parcel_1.get_capakey(), licence_brain.parcelInfosIndex)
+        self.assertIn(parcel_1.get_capakey(), inspection_brain.parcelInfosIndex)
+        self.assertIn(parcel_1.get_capakey(), ticket_brain.parcelInfosIndex)
+
+        # add a parcel2, the index should now contain the two parcel references
+        parcel_2 = api.content.create(
+            container=licence, type='Parcel', id='parcel2',
+            division=u'AA', section=u'B', radical=u'69', exposant=u'E'
+        )
+        licence_brain = catalog(UID=licence.UID())[0]
+        inspection_brain = catalog(UID=inspection.UID())[0]
+        ticket_brain = catalog(UID=ticket.UID())[0]
+        self.assertIn(parcel_1.get_capakey(), licence_brain.parcelInfosIndex)
+        self.assertIn(parcel_1.get_capakey(), inspection_brain.parcelInfosIndex)
+        self.assertIn(parcel_1.get_capakey(), ticket_brain.parcelInfosIndex)
+        self.assertIn(parcel_2.get_capakey(), licence_brain.parcelInfosIndex)
+        self.assertIn(parcel_2.get_capakey(), inspection_brain.parcelInfosIndex)
+        self.assertIn(parcel_2.get_capakey(), ticket_brain.parcelInfosIndex)
+
+        # we remove parcel1, parcel2 capakey should be the only remaining
+        # on the index
+        api.content.delete(parcel_1)
+        licence_brain = catalog(UID=licence.UID())[0]
+        inspection_brain = catalog(UID=inspection.UID())[0]
+        ticket_brain = catalog(UID=ticket.UID())[0]
+        self.assertNotIn(parcel_1.get_capakey(), licence_brain.parcelInfosIndex)
+        self.assertNotIn(parcel_1.get_capakey(), inspection_brain.parcelInfosIndex)
+        self.assertNotIn(parcel_1.get_capakey(), ticket_brain.parcelInfosIndex)
+        self.assertIn(parcel_2.get_capakey(), licence_brain.parcelInfosIndex)
+        self.assertIn(parcel_2.get_capakey(), inspection_brain.parcelInfosIndex)
+        self.assertIn(parcel_2.get_capakey(), ticket_brain.parcelInfosIndex)
+
+        # modify parcel2 capakey, the index should be updated on the licence
+        old_capakey = parcel_2.get_capakey()
+        parcel_2.puissance = u'69'
+        self.assertNotEqual(old_capakey, parcel_2.get_capakey())
+        notify(ObjectModifiedEvent(parcel_2))
+        licence_brain = catalog(UID=licence.UID())[0]
+        inspection_brain = catalog(UID=inspection.UID())[0]
+        ticket_brain = catalog(UID=ticket.UID())[0]
+        self.assertIn(parcel_2.get_capakey(), licence_brain.parcelInfosIndex)
+        self.assertIn(parcel_2.get_capakey(), inspection_brain.parcelInfosIndex)
+        self.assertIn(parcel_2.get_capakey(), ticket_brain.parcelInfosIndex)
 
     def test_parcel_event_set_authenticity(self):
         licence = self.licence
@@ -181,5 +244,3 @@ class TestParcel(unittest.TestCase):
         parcel_3.division = u'AAA'
         notify(ObjectModifiedEvent(parcel_3))
         self.assertEquals(parcelling.Title(), 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005 - "AAA BB 69")')
-        # remove created parcels to not impact other tests
-        api.content.delete(parcel_3)
