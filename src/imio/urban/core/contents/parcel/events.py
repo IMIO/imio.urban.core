@@ -29,12 +29,12 @@ def update_container_parcelindex(parcel, event):
     parcel.aq_inner.aq_parent.reindexObject(idxs=["parcelInfosIndex"])
 
 
-def update_bound_licences_parcelindex(parcel, events):
+def update_bound_licences_parcelindex(parcel, container=None, events=[]):
     """
     If ticket or inspection refers to the parcel licence, update their
     parcelInfosIndex as well when the parcel is modified/deleted/created.
     """
-    licence = parcel.aq_inner.aq_parent
+    licence = getattr(parcel, 'aq_parent', container)
     licenceEvents._updateBoundLicencesIndexes(
         licence, events, indexes=['parcelInfosIndex']
     )

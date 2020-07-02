@@ -115,7 +115,11 @@ class TestParcel(unittest.TestCase):
         inspection = self._create_test_licence('Inspection')
         ticket = self._create_test_licence('Ticket')
         inspection.setBound_licences([licence])
+        inspection.setUse_bound_licence_infos(True)
+        notify(ObjectModifiedEvent(inspection))
         ticket.setBound_inspection(inspection)
+        ticket.setUse_bound_inspection_infos(True)
+        notify(ObjectModifiedEvent(ticket))
         catalog = api.portal.get_tool('portal_catalog')
 
         licence_brain = catalog(UID=licence.UID())[0]

@@ -20,7 +20,7 @@
               handler=".events.update_container_parcelindex" />
 
   <subscriber for="imio.urban.core.contents.parcel.interfaces.IParcel
-                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+                   zope.lifecycleevent.interfaces.IObjectAddedEvent"
               handler=".events.update_bound_licences_parcelindex" />
 
   <subscriber for="imio.urban.core.contents.parcel.interfaces.IParcel
