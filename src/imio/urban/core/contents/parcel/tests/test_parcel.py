@@ -172,3 +172,5 @@ class TestParcel(unittest.TestCase):
         parcel_3.division = 'AAA'
         notify(ObjectModifiedEvent(parcel_3))
         self.assertEquals(parcelling.Title(), 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005 - "AAA BB 69")')
+        # remove created parcels to not impact other tests
+        api.content.delete(parcel_3)
