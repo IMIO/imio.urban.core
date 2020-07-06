@@ -1,0 +1,24 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="imio.urban.core">
+
+    <include package="Products.GenericSetup" file="meta.zcml" />
+
+    <genericsetup:registerProfile
+        name="preinstall"
+        title="imio.urban.core-preinstall"
+        directory="profiles/preinstall"
+        description="Base preinstall profile for imio.urban.core."
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+
+    <genericsetup:registerProfile
+        name="default"
+        title="imio.urban.core"
+        directory="profiles/default"
+        description="Installs the imio.urban.core add-on."
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+
+</configure>

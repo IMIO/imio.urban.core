@@ -21,8 +21,9 @@ import imio.urban.core
 class ImioUrbanCoreLayer(PloneSandboxLayer):
 
     defaultBases = (PLONE_FIXTURE,)
-    products = ('imio.urban.core',
-               )
+    products = (
+        'imio.urban.core',
+    )
 
     def setUpZope(self, app, configurationContext):
         """Set up Zope."""
@@ -55,19 +56,19 @@ class ImioUrbanCoreLayer(PloneSandboxLayer):
 
 FIXTURE = ImioUrbanCoreLayer(
     name="FIXTURE"
-    )
+)
 
 
 INTEGRATION = IntegrationTesting(
     bases=(FIXTURE,),
     name="INTEGRATION"
-    )
+)
 
 
 FUNCTIONAL = FunctionalTesting(
     bases=(FIXTURE,),
     name="FUNCTIONAL"
-    )
+)
 
 
 ACCEPTANCE = FunctionalTesting(bases=(FIXTURE,

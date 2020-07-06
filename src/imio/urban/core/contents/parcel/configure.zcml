@@ -1,0 +1,62 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="imio.urban.core">
+
+  <!-- Browser views -->
+  <browser:page
+     for="imio.urban.core.contents.parcel.content.IParcel"
+     name="view"
+     class=".views.ParcelViewRedirects"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="imio.urban.core.contents.parcel.content.IParcel"
+     name="edit"
+     class=".views.ParcelEditForm"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="imio.urban.core.contents.parcel.content.IParcel"
+     name="parcelview"
+     class=".views.ParcelView"
+     permission="zope2.View"
+     template="../templates/item.pt"
+  />
+
+  <!-- Zope events -->
+  <subscriber for="imio.urban.core.contents.parcel.content.IParcel
+                   zope.lifecycleevent.IObjectCreatedEvent"
+               handler=".events.set_authenticity" />
+
+  <subscriber for="imio.urban.core.contents.parcel.content.IParcel
+                   zope.lifecycleevent.IObjectModifiedEvent"
+              handler=".events.set_authenticity" />
+
+  <subscriber for="imio.urban.core.contents.parcel.content.IParcel
+                   zope.lifecycleevent.IObjectModifiedEvent"
+              handler=".events.update_container_parcelindex" />
+
+  <subscriber for="imio.urban.core.contents.parcel.content.IParcel
+                   zope.lifecycleevent.IObjectRemovedEvent"
+              handler=".events.update_container_parcelindex" />
+
+  <subscriber for="imio.urban.core.contents.parcel.content.IParcel
+                   zope.lifecycleevent.IObjectAddedEvent"
+              handler=".events.update_bound_licences_parcelindex" />
+
+  <subscriber for="imio.urban.core.contents.parcel.content.IParcel
+                   zope.lifecycleevent.IObjectModifiedEvent"
+              handler=".events.update_bound_licences_parcelindex" />
+
+  <subscriber for="imio.urban.core.contents.parcel.content.IParcel
+                   zope.lifecycleevent.IObjectRemovedEvent"
+              handler=".events.update_bound_licences_parcelindex" />
+
+  <subscriber for="imio.urban.core.contents.parcel.content.IParcel
+                   zope.lifecycleevent.IObjectModifiedEvent"
+              handler=".events.update_parcelling_title" />
+
+</configure>

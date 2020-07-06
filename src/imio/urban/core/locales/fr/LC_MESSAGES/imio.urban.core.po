@@ -1,0 +1,79 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2020-07-02 13:03+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+#: ../profiles.zcml:14
+msgid "Base preinstall profile for imio.urban.core."
+msgstr ""
+
+#: ../contents/parcel/interfaces.py:40
+msgid "Bis"
+msgstr "Bis"
+
+#: ../contents/parcel/interfaces.py:21
+msgid "Division"
+msgstr "Division"
+
+#: ../contents/parcel/interfaces.py:46
+msgid "Exposant"
+msgstr "Exposant"
+
+#: ../profiles.zcml:22
+msgid "Installs the imio.urban.core add-on."
+msgstr ""
+
+#: ../contents/parcel/interfaces.py:65
+msgid "Isofficialparcel"
+msgstr "Parcelle officielle"
+
+#: ../contents/parcel/interfaces.py:72
+msgid "Outdated"
+msgstr "Ancienne parcelle"
+
+#: ../contents/parcel/interfaces.py:58
+msgid "Partie"
+msgstr "Partie"
+
+#: ../contents/parcel/interfaces.py:52
+msgid "Puissance"
+msgstr "Puissance"
+
+#: ../contents/parcel/interfaces.py:34
+msgid "Radical"
+msgstr "Radical"
+
+#: ../contents/parcel/interfaces.py:28
+msgid "Section"
+msgstr "Section"
+
+#: ../testing.zcml:14
+msgid "Steps to ease tests of imio.urban.core"
+msgstr ""
+
+#: ../profiles.zcml:22
+msgid "imio.urban.core"
+msgstr ""
+
+#: ../testing.zcml:14
+msgid "imio.urban.core tests"
+msgstr ""
+
+#: ../profiles.zcml:14
+msgid "imio.urban.core-preinstall"
+msgstr ""
+
+#: ../contents/parcel/interfaces.py:73
+msgid "urban_label_outdated"
+msgstr "la parcelle a-t-elle été renommée/fusionnée/divisée"

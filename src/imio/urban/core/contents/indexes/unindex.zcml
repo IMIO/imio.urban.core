@@ -1,0 +1,25 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:i18n="http://namespaces.zope.org/i18n"
+           i18n_domain="imio.urban.core">
+
+  <!-- fully unindex Parcel type -->
+  <adapter name="sortable_title" factory=".unindex.not_indexed" />
+  <adapter name="SearchableText" factory=".unindex.not_indexed" />
+  <adapter name="Description" factory=".unindex.not_indexed" />
+  <adapter name="Title" factory=".unindex.not_indexed" />
+  <adapter name="Type" factory=".unindex.not_indexed" />
+  <adapter name="portal_type" factory=".unindex.not_indexed" />
+  <adapter name="meta_type" factory=".unindex.not_indexed" />
+  <adapter name="created" factory=".unindex.not_indexed" />
+  <adapter name="modified" factory=".unindex.not_indexed" />
+  <adapter name="Date" factory=".unindex.not_indexed" />
+  <adapter name="Creator" factory=".unindex.not_indexed" />
+  <adapter name="object_provides" factory=".unindex.not_indexed" />
+  <adapter name="review_state" factory=".unindex.not_indexed" />
+  <adapter name="effectiveRange" factory=".unindex.not_indexed" />
+  <adapter name="effective" factory=".unindex.not_indexed" />
+  <adapter name="getReference" factory=".unindex.not_indexed" />
+  <adapter name="extraValue" factory=".unindex.not_indexed" />
+  <adapter name="allowedRolesAndUsers" factory=".unindex.not_indexed" />
+
+</configure>
