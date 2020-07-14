@@ -16,7 +16,7 @@ class TestInstall(IntegrationTestCase):
         self.types_tool = api.portal.get_tool('portal_types')
 
     def test_ParcellingTerm_type_registered(self):
-        """Test if Parcel type is registered in portal_types """
+        """Test if ParcellingTerm type is registered in portal_types """
         self.assertTrue(self.types_tool.get('ParcellingTerm'))
 
     def test_parcellingterm_workflow(self):
