@@ -1,0 +1,14 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone">
+
+    <!-- Parcel UID is not indexed anymore, so use urban custom delete view -->
+    <browser:page
+        for="imio.urban.core.contents.parcel.IParcel"
+        name="delete_givenuid"
+        class=".views.UrbanDeleteGivenUidView"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        permission="zope2.View" />
+
+</configure>
