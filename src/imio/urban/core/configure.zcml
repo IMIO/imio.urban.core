@@ -12,6 +12,7 @@
     <include package="plone.api" />
     <include package="plone.app.dexterity" />
 
+    <include package=".actionspanel" />
     <include package=".browser" />
     <include package=".contents" />
 

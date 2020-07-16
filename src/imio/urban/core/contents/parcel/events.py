@@ -2,6 +2,7 @@
 
 from Products.urban import services
 from Products.urban.events import licenceEvents
+from Products.urban.interfaces import IGenericLicence
 
 
 def set_authenticity(parcel, event):
@@ -35,6 +36,11 @@ def update_bound_licences_parcelindex(parcel, container=None, events=[]):
     parcelInfosIndex as well when the parcel is modified/deleted/created.
     """
     licence = getattr(parcel, 'aq_parent', container)
+    if not IGenericLicence.providedBy(licence):
+        licence = getattr(licence, 'aq_parent', container)
+    # only update if the parent is a licence.
+    if not IGenericLicence.providedBy(licence):
+        return
     licenceEvents._updateBoundLicencesIndexes(
         licence, events, indexes=['parcelInfosIndex']
     )
