@@ -5,7 +5,7 @@
      <bound-workflow workflow_id="one_state_workflow" />
    </type>
    <type type_id="Parcelling">
-     <bound-workflow workflow_id="one_state_workflow" />
+     <bound-workflow workflow_id="activation_workflow" />
    </type>
  </bindings>
 </object>

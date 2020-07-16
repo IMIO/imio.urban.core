@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-"""Setup/installation tests for Parcelling."""
+
+from Products.urban.testing import URBAN_TESTS_CONFIG
 
 from imio.urban.core.testing import IntegrationTestCase
 
@@ -20,4 +21,16 @@ class TestInstall(IntegrationTestCase):
 
     def test_parcelling_workflow(self):
         wf_tool = api.portal.get_tool('portal_workflow')
-        self.assertEqual(wf_tool.getChainForPortalType('Parcelling'), ('one_state_workflow',))
+        self.assertEqual(wf_tool.getChainForPortalType('Parcelling'), ('activation_workflow',))
+
+
+class TestConfigInstall(IntegrationTestCase):
+
+    layer = URBAN_TESTS_CONFIG
+
+    def test_default_parcellings_created(self):
+        portal = self.layer['portal']
+        parcellings = portal.urban.parcellings.objectValues()
+        self.assertEquals(len(parcellings), 1)
+        parcelling = parcellings[0]
+        self.assertEquals(parcelling.portal_type, 'Parcelling')
