@@ -4,6 +4,6 @@
 
     <include package=".indexes" />
     <include package=".parcel" />
-    <include package=".parcellingterm" />
+    <include package=".parcelling" />
 
 </configure>

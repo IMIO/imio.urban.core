@@ -13,9 +13,9 @@ from zope import schema
 from zope.interface import implementer
 
 
-class IParcellingTerm(model.Schema):
+class IParcelling(model.Schema):
     """
-    ParcellingTerm dexterity schema.
+    Parcelling dexterity schema.
     """
 
     form.widget('title', TextWidget)
@@ -73,8 +73,8 @@ class IParcellingTerm(model.Schema):
     )
 
 
-@implementer(IParcellingTerm)
-class ParcellingTerm(Item):
+@implementer(IParcelling)
+class Parcelling(Item):
     """
-    ParcellingTerm dexterity class.
+    Parcelling dexterity class.
     """

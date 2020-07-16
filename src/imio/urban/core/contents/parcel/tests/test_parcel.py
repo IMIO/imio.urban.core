@@ -41,7 +41,7 @@ class TestParcel(unittest.TestCase):
         portal = self.layer['portal']
         self.portal = portal
         self.portal_urban = portal.portal_urban
-        self.parcellingterm = portal.urban.parcellings.objectValues()[0]
+        self.parcelling = portal.urban.parcellings.objectValues()[0]
         default_user = self.layer.default_user
         login(self.portal, default_user)
         # create a test CODT_BuildLicence
@@ -68,8 +68,8 @@ class TestParcel(unittest.TestCase):
     def test_parcel_indexing_on_licence(self):
         self._test_parcel_indexing_on_container(self.licence)
 
-    def test_parcel_indexing_on_parcellingTerm(self):
-        self._test_parcel_indexing_on_container(self.parcellingterm)
+    def test_parcel_indexing_on_parcelling(self):
+        self._test_parcel_indexing_on_container(self.parcelling)
 
     def _test_parcel_indexing_on_container(self, container):
         catalog = api.portal.get_tool('portal_catalog')
@@ -212,8 +212,8 @@ class TestParcel(unittest.TestCase):
         self.assertEqual(parcel.getDivisionCode(), parcel.getDivision())
         self.assertEqual(parcel.divisionCode, parcel.getDivision())
 
-    def test_parcellingTerm_title_update(self):
-        parcelling = self.parcellingterm
+    def test_parcelling_title_update(self):
+        parcelling = self.parcelling
         self.assertEquals(parcelling.Title(), 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005)')
         # after adding a parcel1, title should be updated with the base
         # references  of this parcel (here:  A, B, C but not D)

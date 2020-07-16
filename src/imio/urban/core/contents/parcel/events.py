@@ -42,5 +42,5 @@ def update_bound_licences_parcelindex(parcel, container=None, events=[]):
 
 def update_parcelling_title(contact, event):
     parent = contact.aq_inner.aq_parent
-    if parent.portal_type == 'ParcellingTerm':
+    if parent.portal_type == 'Parcelling':
         parent.updateTitle()

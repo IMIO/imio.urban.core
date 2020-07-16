@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from imio.urban.core.contents.parcellingterm import IParcellingTerm
+from imio.urban.core.contents.parcelling import IParcelling
 from plone.indexer import indexer
 
 
-@indexer(IParcellingTerm)
-def parcellingterm_parcelinfoindex(obj):
+@indexer(IParcelling)
+def parcelling_parcelinfoindex(obj):
     """
     Index parcels of a parcelling term
     """
