@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-07-02 13:03+0000\n"
+"POT-Creation-Date: 2020-07-17 12:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,15 +18,15 @@ msgstr ""
 msgid "Base preinstall profile for imio.urban.core."
 msgstr ""
 
-#: ../contents/parcel/interfaces.py:40
+#: ../contents/parcel/content.py:48
 msgid "Bis"
 msgstr "Bis"
 
-#: ../contents/parcel/interfaces.py:21
+#: ../contents/parcel/content.py:29
 msgid "Division"
 msgstr "Division"
 
-#: ../contents/parcel/interfaces.py:46
+#: ../contents/parcel/content.py:54
 msgid "Exposant"
 msgstr "Exposant"
 
@@ -34,27 +34,27 @@ msgstr "Exposant"
 msgid "Installs the imio.urban.core add-on."
 msgstr ""
 
-#: ../contents/parcel/interfaces.py:65
+#: ../contents/parcel/content.py:73
 msgid "Isofficialparcel"
 msgstr "Parcelle officielle"
 
-#: ../contents/parcel/interfaces.py:72
+#: ../contents/parcel/content.py:80
 msgid "Outdated"
 msgstr "Ancienne parcelle"
 
-#: ../contents/parcel/interfaces.py:58
+#: ../contents/parcel/content.py:66
 msgid "Partie"
 msgstr "Partie"
 
-#: ../contents/parcel/interfaces.py:52
+#: ../contents/parcel/content.py:60
 msgid "Puissance"
 msgstr "Puissance"
 
-#: ../contents/parcel/interfaces.py:34
+#: ../contents/parcel/content.py:42
 msgid "Radical"
 msgstr "Radical"
 
-#: ../contents/parcel/interfaces.py:28
+#: ../contents/parcel/content.py:36
 msgid "Section"
 msgstr "Section"
 
@@ -74,6 +74,42 @@ msgstr ""
 msgid "imio.urban.core-preinstall"
 msgstr ""
 
-#: ../contents/parcel/interfaces.py:73
+#: ../contents/parcelling/content.py:44
+msgid "urban_label_CommunalReference"
+msgstr "Référence communale"
+
+#: ../contents/parcelling/content.py:49
+msgid "urban_label_DGO4Reference"
+msgstr "Référence de la région wallone"
+
+#: ../contents/parcelling/content.py:39
+msgid "urban_label_approvalDate"
+msgstr "Date d'approbation"
+
+#: ../contents/parcelling/content.py:34
+msgid "urban_label_authorizationDate"
+msgstr "Date d'autorisation"
+
+#: ../contents/parcelling/content.py:59
+msgid "urban_label_changesDescription"
+msgstr "Modifications du lotissement"
+
+#: ../contents/parcelling/content.py:24
+msgid "urban_label_label"
+msgstr "Libellé"
+
+#: ../contents/parcelling/content.py:54
+msgid "urban_label_numberOfParcels"
+msgstr "Nombre de lots"
+
+#: ../contents/parcel/content.py:81
 msgid "urban_label_outdated"
 msgstr "la parcelle a-t-elle été renommée/fusionnée/divisée"
+
+#: ../contents/parcelling/content.py:29
+msgid "urban_label_subdividerName"
+msgstr "Nom du lotisseur"
+
+#: ../contents/parcelling/content.py:19
+msgid "urban_label_title"
+msgstr "Titre"
