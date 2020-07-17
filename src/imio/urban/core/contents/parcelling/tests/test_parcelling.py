@@ -2,6 +2,8 @@
 
 from Products.urban.testing import URBAN_TESTS_CONFIG
 
+from datetime import date
+
 from imio.urban.core.testing import IntegrationTestCase
 
 from plone import api
@@ -24,7 +26,7 @@ class TestInstall(IntegrationTestCase):
         self.assertEqual(wf_tool.getChainForPortalType('Parcelling'), ('activation_workflow',))
 
 
-class TestConfigInstall(IntegrationTestCase):
+class TestParcellingConfigInstall(IntegrationTestCase):
 
     layer = URBAN_TESTS_CONFIG
 
@@ -34,3 +36,9 @@ class TestConfigInstall(IntegrationTestCase):
         self.assertEquals(len(parcellings), 1)
         parcelling = parcellings[0]
         self.assertEquals(parcelling.portal_type, 'Parcelling')
+        self.assertEquals(parcelling.title, u'Lotissement 1 (André Ledieu - 01/01/2005)')
+        self.assertEquals(parcelling.label, u'Lotissement 1')
+        self.assertEquals(parcelling.subdividerName, u'André Ledieu')
+        self.assertEquals(parcelling.approvalDate, date(2005, 1, 12))
+        self.assertEquals(parcelling.authorizationDate, date(2005, 1, 1))
+        self.assertEquals(parcelling.numberOfParcels, 10)
