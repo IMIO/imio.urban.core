@@ -47,6 +47,8 @@
          visible="True">
   <permission value="Modify portal content"/>
  </action>
-<!-- ##code-section FOOT -->
-<!-- ##/code-section FOOT -->
+ <!-- enabled behaviors -->
+ <property name="behaviors">
+  <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
+ </property>
 </object>

@@ -47,6 +47,4 @@
          visible="True">
   <permission value="Modify portal content"/>
  </action>
-<!-- ##code-section FOOT -->
-<!-- ##/code-section FOOT -->
 </object>

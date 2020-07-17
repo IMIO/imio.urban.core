@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """Setup/installation tests for Parcel."""
 
-from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
 from Products.urban import utils
+from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
 
 from imio.urban.core.testing import IntegrationTestCase
 
-from plone.app.testing import login
 from plone import api
+from plone.app.testing import login
 
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
