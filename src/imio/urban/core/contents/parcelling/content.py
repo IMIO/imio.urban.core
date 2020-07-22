@@ -15,11 +15,6 @@ class IParcelling(model.Schema):
     Parcelling dexterity schema.
     """
 
-    title = schema.TextLine(
-        title=_(u'urban_label_title'),
-        required=False,
-    )
-
     label = schema.TextLine(
         title=_(u'urban_label_label'),
         required=True,

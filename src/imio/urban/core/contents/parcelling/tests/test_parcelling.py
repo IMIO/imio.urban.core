@@ -42,7 +42,7 @@ class TestParcellingIntegration(IntegrationTestCase):
         self.assertEquals(len(parcellings), 1)
         parcelling = parcellings[0]
         self.assertEquals(parcelling.portal_type, 'Parcelling')
-        self.assertEquals(parcelling.title, u'Lotissement 1 (André Ledieu - 01/01/2005)')
+        self.assertEquals(parcelling.Title(), 'Lotissement 1 (André Ledieu - 01/01/2005 - 12/01/2005)')
         self.assertEquals(parcelling.label, u'Lotissement 1')
         self.assertEquals(parcelling.subdividerName, u'André Ledieu')
         self.assertEquals(parcelling.approvalDate, date(2005, 1, 12))
@@ -54,8 +54,7 @@ class TestParcellingIntegration(IntegrationTestCase):
         parcellings = portal.urban.parcellings.objectValues()
         self.assertEquals(len(parcellings), 1)
         parcelling = parcellings[0]
-        self.assertEquals(parcelling.portal_type, 'Parcelling')
-        self.assertEquals(parcelling.title, u'Lotissement 1 (André Ledieu - 01/01/2005)')
+        self.assertEquals(parcelling.Title(), 'Lotissement 1 (André Ledieu - 01/01/2005 - 12/01/2005)')
 
 
 class TestParcelling(unittest.TestCase):
