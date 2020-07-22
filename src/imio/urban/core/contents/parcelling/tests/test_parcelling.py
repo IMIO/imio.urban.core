@@ -32,7 +32,7 @@ class TestInstall(IntegrationTestCase):
         self.assertEqual(wf_tool.getChainForPortalType('Parcelling'), ('activation_workflow',))
 
 
-class TestParcellingConfigInstall(IntegrationTestCase):
+class TestParcellingIntegration(IntegrationTestCase):
 
     layer = URBAN_TESTS_CONFIG
 
@@ -48,6 +48,14 @@ class TestParcellingConfigInstall(IntegrationTestCase):
         self.assertEquals(parcelling.approvalDate, date(2005, 1, 12))
         self.assertEquals(parcelling.authorizationDate, date(2005, 1, 1))
         self.assertEquals(parcelling.numberOfParcels, 10)
+
+    def test_parcelling_title(self):
+        portal = self.layer['portal']
+        parcellings = portal.urban.parcellings.objectValues()
+        self.assertEquals(len(parcellings), 1)
+        parcelling = parcellings[0]
+        self.assertEquals(parcelling.portal_type, 'Parcelling')
+        self.assertEquals(parcelling.title, u'Lotissement 1 (André Ledieu - 01/01/2005)')
 
 
 class TestParcelling(unittest.TestCase):

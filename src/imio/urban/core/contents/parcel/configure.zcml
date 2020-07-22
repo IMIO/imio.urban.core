@@ -55,8 +55,4 @@
                    zope.lifecycleevent.IObjectRemovedEvent"
               handler=".events.update_bound_licences_parcelindex" />
 
-  <subscriber for="imio.urban.core.contents.parcel.content.IParcel
-                   zope.lifecycleevent.IObjectModifiedEvent"
-              handler=".events.update_parcelling_title" />
-
 </configure>

@@ -66,3 +66,44 @@ class Parcelling(Item):
     """
     Parcelling dexterity class.
     """
+
+    def getLabel(self):
+        return self.label or ''
+
+    def getSubdividerName(self):
+        return self.subdividerName or ''
+
+    def getAuthorizationDate(self):
+        return self.authorizationDate or None
+
+    def getApprovalDate(self):
+        return self.approvalDate or None
+
+    def getCommunalReference(self):
+        return self.communalReference or ''
+
+    def getDGO4Reference(self):
+        return self.DGO4Reference or ''
+
+    def getNumberOfParcels(self):
+        return self.numberOfParcels or ''
+
+    def getChangesDescription(self):
+        return self.changesDescription or '<p></p>'
+
+    def Title(self):
+        """
+           Update the title to set a clearly identify the buildlicence
+        """
+        title = u"%s (%s" % (self.getLabel(), self.getSubdividerName())
+
+        auth_date = self.getAuthorizationDate()
+        if auth_date:
+            title = u'%s - %s' % (title, auth_date.strftime('%d/%m/%Y'))
+
+        approval_date = self.getApprovalDate()
+        if approval_date:
+            title = u'%s - %s' % (title, approval_date.strftime('%d/%m/%Y'))
+
+        title = u'%s)' % title
+        return title

@@ -24,6 +24,7 @@
  <property name="klass">imio.urban.core.contents.parcelling.content.Parcelling</property>
  <property name="behaviors">
   <element value="plone.app.lockingbehavior.behaviors.ILocking" />
+  <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
  </property>
  <property name="schema">imio.urban.core.contents.parcelling.content.IParcelling</property>
  <property name="schema_policy">dexterity</property>
@@ -47,8 +48,4 @@
          visible="True">
   <permission value="Modify portal content"/>
  </action>
- <!-- enabled behaviors -->
- <property name="behaviors">
-  <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
- </property>
 </object>

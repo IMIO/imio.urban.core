@@ -68,9 +68,6 @@ class TestParcel(unittest.TestCase):
     def test_parcel_indexing_on_licence(self):
         self._test_parcel_indexing_on_container(self.licence)
 
-    def test_parcel_indexing_on_parcelling(self):
-        self._test_parcel_indexing_on_container(self.parcelling)
-
     def _test_parcel_indexing_on_container(self, container):
         catalog = api.portal.get_tool('portal_catalog')
         container_id = container.id
@@ -211,40 +208,3 @@ class TestParcel(unittest.TestCase):
         # divisionCode should always return the value contained in the field division.
         self.assertEqual(parcel.getDivisionCode(), parcel.getDivision())
         self.assertEqual(parcel.divisionCode, parcel.getDivision())
-
-    def test_parcelling_title_update(self):
-        parcelling = self.parcelling
-        self.assertEquals(parcelling.Title(), 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005)')
-        # after adding a parcel1, title should be updated with the base
-        # references  of this parcel (here:  A, B, C but not D)
-        api.content.create(
-            container=parcelling, type='Parcel', id='parcel1',
-            division=u'A', section=u'B', radical=u'6', exposant=u'D'
-        )
-        self.assertEquals(parcelling.Title(), 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005 - "A B 6")')
-
-        # after adding a parcel2 with the same base refs, the title
-        # should not change
-        api.content.create(
-            container=parcelling, type='Parcel', id='parcel2',
-            division=u'A', section=u'B', radical=u'6', exposant=u'E'
-        )
-        self.assertEquals(parcelling.Title(), 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005 - "A B 6")')
-
-        # after adding a parcel3 with different base refs, the title
-        # should be updated
-        parcel_3 = api.content.create(
-            container=parcelling, type='Parcel', id='parcel3',
-            division=u'AA', section=u'BB', radical=u'69', exposant=u'D'
-        )
-        self.assertEquals(parcelling.Title(), 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005 - "AA BB 69", "A B 6")')
-
-        # we remove parcel1 and parcel2, title should change to only
-        # keep the base refs of parcel3
-        parcelling.manage_delObjects(['parcel1', 'parcel2'])
-        self.assertEquals(parcelling.Title(), 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005 - "AA BB 69")')
-
-        # modify parcel3, parcelling title should be updated
-        parcel_3.division = u'AAA'
-        notify(ObjectModifiedEvent(parcel_3))
-        self.assertEquals(parcelling.Title(), 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005 - "AAA BB 69")')
