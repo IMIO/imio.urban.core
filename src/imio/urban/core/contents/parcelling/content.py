@@ -106,4 +106,4 @@ class Parcelling(Item):
             title = u'%s - %s' % (title, approval_date.strftime('%d/%m/%Y'))
 
         title = u'%s)' % title
-        return title
+        return title.encode('utf-8')
