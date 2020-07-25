@@ -11,6 +11,37 @@
      permission="zope2.View"
   />
 
+  <adapter
+     for="Products.CMFCore.interfaces.IFolderish
+          zope.publisher.interfaces.browser.IDefaultBrowserLayer
+          plone.dexterity.interfaces.IDexterityFTI"
+     provides="zope.publisher.interfaces.browser.IBrowserPage"
+     factory=".views.ParcelAddView"
+     name="Parcel"
+  />
+
+  <class class=".views.ParcelAddView">
+    <require
+        permission="cmf.AddPortalContent"
+        interface="zope.publisher.interfaces.browser.IBrowserPage"
+        />
+  </class>
+
+    <!--adapter
+      for="Products.CMFCore.interfaces.IFolderish
+           zope.publisher.interfaces.browser.IDefaultBrowserLayer
+           plone.dexterity.interfaces.IDexterityFTI"
+      provides="zope.publisher.interfaces.browser.IBrowserPage"
+      factory=".task_view.TaskAddView"
+      name="task"
+    />
+    <class class=".task_view.TaskAddView">
+      <require
+        permission="cmf.AddPortalContent"
+        interface="zope.publisher.interfaces.browser.IBrowserPage"
+       />
+    </class-->
+
   <browser:page
      for="imio.urban.core.contents.parcel.content.IParcel"
      name="edit"
