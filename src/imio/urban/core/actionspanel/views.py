@@ -13,10 +13,7 @@ import transaction
 
 class UrbanDeleteGivenUidView(DeleteGivenUidView):
     """
-      View that ease deletion of elements by not checking the 'Delete objects' permission on parent
-      but only on the object to delete itself (default implentation of IContentDeletable.mayDelete).
-      Callable using self.portal.restrictedTraverse('@@delete_givenuid)(object_to_delete.UID()) in the code
-      and using classic traverse in a url : http://nohost/plonesite/delete_givenuid?object_uid=anUID
+    Override deleteUID view to be able to delete uncatalogued objects.
     """
 
     def __call__(self,
