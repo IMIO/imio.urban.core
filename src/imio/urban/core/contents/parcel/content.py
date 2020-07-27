@@ -21,7 +21,7 @@ from zope import schema
 
 class IParcel(model.Schema):
     """
-    Parcel dexterity schema.
+    Parcel zope schema.
     """
 
     form.widget('division', SelectWidget)
@@ -87,7 +87,7 @@ class IParcel(model.Schema):
 @implementer(IParcel)
 class Parcel(Item):
     """
-    Parcel dexterity class.
+    Parcel class.
     """
 
     def Title(self):
