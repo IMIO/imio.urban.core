@@ -20,7 +20,7 @@
   <element value="view"/>
  </property>
  <property name="default_view_fallback">False</property>
- <property name="add_permission">imio.urban.add_parcelling</property>
+ <property name="add_permission">cmf.AddPortalContent</property>
  <property name="klass">imio.urban.core.contents.parcelling.content.Parcelling</property>
  <property name="behaviors">
   <element value="plone.app.lockingbehavior.behaviors.ILocking" />
