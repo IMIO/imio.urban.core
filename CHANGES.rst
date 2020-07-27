@@ -7,3 +7,6 @@ Changelog
 
 - Add content type Parcel (replacing AT PortionOut).
   [sdelcourt]
+
+- Add content type Parcelling (replacing AT ParcellingTerm).
+  [sdelcourt]

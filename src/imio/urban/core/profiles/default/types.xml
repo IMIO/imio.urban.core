@@ -3,4 +3,6 @@
         meta_type="Plone Types Tool">
  <object name="Parcel"
          meta_type="Dexterity FTI"/>
+ <object name="Parcelling"
+         meta_type="Dexterity FTI"/>
 </object>

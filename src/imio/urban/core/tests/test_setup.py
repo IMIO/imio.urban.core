@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-"""Setup/installation tests for this package."""
 
 from imio.urban.core.testing import IntegrationTestCase
 from plone import api

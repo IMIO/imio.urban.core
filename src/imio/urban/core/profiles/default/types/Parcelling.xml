@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
-<object name="Parcel"
+<object name="Parcelling"
         meta_type="Dexterity FTI"
         xmlns:i18n="http://xml.zope.org/namespaces/i18n"
         i18n:domain="plone">
 
- <property name="title" i18n:translate="">Parcel</property>
+ <property name="title" i18n:translate="">Parcelling</property>
  <property name="description" i18n:translate=""></property>
- <property name="icon_expr">string:${portal_url}/Parcel.png</property>
- <property name="factory">Parcel</property>
+ <property name="icon_expr">string:${portal_url}/Parcelling.png</property>
+ <property name="factory">Parcelling</property>
  <property
-    name="add_view_expr">string:${folder_url}/++add++Parcel</property>
+    name="add_view_expr">string:${folder_url}/++add++Parcelling</property>
  <property name="link_target"></property>
  <property name="immediate_view">view</property>
  <property name="global_allow">True</property>
@@ -20,12 +20,13 @@
   <element value="view"/>
  </property>
  <property name="default_view_fallback">False</property>
- <property name="add_permission">imio.urban.add_parcel</property>
- <property name="klass">imio.urban.core.contents.parcel.Parcel</property>
+ <property name="add_permission">imio.urban.add_parcelling</property>
+ <property name="klass">imio.urban.core.contents.parcelling.content.Parcelling</property>
  <property name="behaviors">
   <element value="plone.app.lockingbehavior.behaviors.ILocking" />
+  <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
  </property>
- <property name="schema">imio.urban.core.contents.parcel.IParcel</property>
+ <property name="schema">imio.urban.core.contents.parcelling.content.IParcelling</property>
  <property name="schema_policy">dexterity</property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="index.html" to="(dynamic view)"/>
