@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <object name="portal_workflow" meta_type="Plone Workflow Tool">
  <bindings>
+   <type type_id="EventConfig">
+     <bound-workflow workflow_id="activation_workflow" />
+   </type>
    <type type_id="Parcel">
      <bound-workflow workflow_id="one_state_workflow" />
    </type>

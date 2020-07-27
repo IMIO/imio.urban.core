@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<object name="EventConfig"
+        meta_type="Dexterity FTI"
+        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        i18n:domain="plone">
+
+ <property name="title" i18n:translate="">EventConfig</property>
+ <property name="description" i18n:translate=""></property>
+ <property name="icon_expr">string:${portal_url}/EventConfig.png</property>
+ <property name="factory">EventConfig</property>
+ <property
+    name="add_view_expr">string:${folder_url}/++add++EventConfig</property>
+ <property name="link_target"></property>
+ <property name="immediate_view">view</property>
+ <property name="global_allow">True</property>
+ <property name="filter_content_types">False</property>
+ <property name="allow_discussion">False</property>
+ <property name="default_view">view</property>
+ <property name="view_methods">
+  <element value="view"/>
+ </property>
+ <property name="default_view_fallback">False</property>
+ <property name="add_permission">cmf.AddPortalContent</property>
+ <property name="klass">imio.urban.core.contents.eventconfig.EventConfig</property>
+ <property name="behaviors">
+  <element value="plone.app.lockingbehavior.behaviors.ILocking" />
+ </property>
+ <property name="schema">imio.urban.core.contents.eventconfig.IEventConfig</property>
+ <property name="schema_policy">dexterity</property>
+ <alias from="(Default)" to="(dynamic view)"/>
+ <alias from="index.html" to="(dynamic view)"/>
+ <alias from="edit" to="@@edit"/>
+ <alias from="sharing" to="@@sharing"/>
+ <action title="View"
+         action_id="view"
+         category="object"
+         condition_expr=""
+         url_expr="string:${object_url}/view"
+         visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="Edit"
+         action_id="edit"
+         category="object"
+         condition_expr=""
+         url_expr="string:${object_url}/edit"
+         visible="True">
+  <permission value="Modify portal content"/>
+ </action>
+</object>
