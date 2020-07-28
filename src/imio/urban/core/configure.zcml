@@ -9,9 +9,11 @@
 
     <five:registerPackage package="." initialize=".initialize" />
 
+    <include package="collective.z3cform.datagridfield"/>
     <include package="plone.api" />
     <include package="plone.app.dexterity" />
     <include package="plone.app.referenceablebehavior" />
+    <include package="plone.formwidget.masterselect" />
 
     <include package=".actionspanel" />
     <include package=".browser" />
