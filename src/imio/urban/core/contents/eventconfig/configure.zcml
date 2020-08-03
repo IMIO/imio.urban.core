@@ -21,4 +21,16 @@
     provides="zope.schema.interfaces.IVocabularyFactory"
   />
 
+  <utility
+  component=".vocabularies.EventKeyDatesFactory"
+    name="urban.vocabularies.event_enabled_dates"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
+  component=".vocabularies.EventTextFieldsFactory"
+    name="urban.vocabularies.event_text_fields"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
 </configure>

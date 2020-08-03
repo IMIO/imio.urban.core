@@ -26,7 +26,7 @@ class IDefaultTextRowSchema(interface.Interface):
     """
     fieldname = schema.Choice(
         title=u"Fieldname",
-        vocabulary='urban.vocabularies.division_names',
+        vocabulary='urban.vocabularies.event_text_fields',
     )
 
     text = textfield.RichText(title=u"Text")
@@ -99,7 +99,7 @@ class IEventConfig(model.Schema):
     form.widget('keyDates', OrderedSelectWidget)
     keyDates = schema.Choice(
         title=_(u'keyDates'),
-        vocabulary='urban.vocabularies.division_names',
+        vocabulary='urban.vocabularies.event_enabled_dates',
         required=False,
     )
 
@@ -122,5 +122,29 @@ class EventConfig(Container):
     EventConfig class
     """
 
+    def getShowTitle(self):
+        return self.showTitle or False
+
+    def getEventDateLabel(self):
+        return self.eventDateLabel or u''
+
     def getEventPortalType(self):
-        return getattr(self, 'eventPortalType', '')
+        return self.eventPortalType or u''
+
+    def getActivatedFields(self):
+        return self.activatedFields or []
+
+    def getEventType(self):
+        return self.eventType or []
+
+    def getIsKeyEvent(self):
+        return self.isKeyEvent or False
+
+    def getKeyDates(self):
+        return self.keyDates or []
+
+    def getTALCondition(self):
+        return self.TALCondition or u''
+
+    def getTextDefaultValues(self):
+        return self.textDefaultValues or []

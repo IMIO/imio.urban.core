@@ -17,6 +17,24 @@ from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
 
+class EventConfigVocabulary(object):
+    """
+    Base class for EventConfig vocabularies
+    """
+
+    def get_event_portaltype(self, context):
+        if IEventConfig.providedBy(context):
+            return context.getEventPortalType()
+        else:
+            return 'UrbanEvent'
+
+    def get_enabled_fields(self, context):
+        if IEventConfig.providedBy(context):
+            return context.getActivatedFields()
+        else:
+            return []
+
+
 class EventPortalTypesVocabulary(object):
     """
     Vocabulary listing all the UrbanEvent portal types.
@@ -54,21 +72,15 @@ class EventPortalTypesVocabulary(object):
 EventPortalTypesVocabularyFactory = EventPortalTypesVocabulary()
 
 
-class EventOptionalFields(object):
+class EventOptionalFields(EventConfigVocabulary):
     """
-    Vocabulary listing all the optional fields of the selected.
+    List all the possible optional fields.
     Only implemented for AT UrbanEvent, to reimplements once
     UrbanEvent are migrated to DX.
     """
 
     def __call__(self, context, event_portaltype=''):
-        # try to find the UrbanEvent portal_type on the EventConfig
-        if not event_portaltype:
-            if IEventConfig.providedBy(context):
-                event_portaltype = context.getEventPortalType()
-            else:
-                event_portaltype = 'UrbanEvent'
-
+        event_portaltype = event_portaltype or self.get_event_portaltype(context)
         klass = get_portal_type_class(event_portaltype)
         optional_fields = []
         fields = klass.schema.fields()
@@ -94,6 +106,9 @@ EventOptionalFieldsFactory = EventOptionalFields()
 
 
 class EventTypes(object):
+    """
+    List all the evenType marker interfaces.
+    """
 
     def __call__(self, context):
         gsm = getGlobalSiteManager()
@@ -120,3 +135,78 @@ class EventTypes(object):
 
 
 EventTypesFactory = EventTypes()
+
+
+class EventKeyDates(EventConfigVocabulary):
+    """
+    List all the enabled dates of this eventConfig.
+    """
+
+    def __call__(self, context):
+        event_portaltype = self.get_event_portaltype(context)
+        enabled_fields = self.get_enabled_fields(context)
+        klass = get_portal_type_class(event_portaltype)
+        all_fields = klass.schema.getSchemataFields('default')
+        date_fields = []
+        for field in all_fields:
+            is_date_field = field.getType() == 'Products.Archetypes.Field.DateTimeField'
+            if is_date_field:
+                fieldname = field.getName()
+                if getattr(field, 'optional', False) and fieldname in enabled_fields:
+                    date_fields.append(
+                        (
+                            fieldname,
+                            translate(
+                                "urban_label_" + fieldname,
+                                'urban',
+                                default=fieldname,
+                                context=context.REQUEST
+                            )
+                        )
+                    )
+        # sort elements by title
+        date_fields = sorted(date_fields, key=lambda name: name[1])
+        vocabulary = SimpleVocabulary([SimpleTerm(d[0], d[0], d[1]) for d in date_fields])
+        return vocabulary
+
+
+EventKeyDatesFactory = EventKeyDates()
+
+
+class EventTextFields(EventConfigVocabulary):
+    """
+    List all the possible text fields.
+    """
+
+    def __call__(self, context):
+        request = api.portal.getRequest()
+        # hack to get the eventConfig as context, since context is <NO_VALUE> in a
+        # datagrid
+        context = request.PARENTS[0]
+        event_portaltype = self.get_event_portaltype(context)
+        klass = get_portal_type_class(event_portaltype)
+        all_fields = klass.schema.getSchemataFields('default')
+        text_fields = []
+        exclude = ['rights']
+        for field in all_fields:
+            is_text_field = field.getType() == 'Products.Archetypes.Field.TextField'
+            fieldname = field.getName()
+            if is_text_field and fieldname not in exclude:
+                text_fields.append(
+                    (
+                        fieldname,
+                        translate(
+                            "urban_label_" + fieldname,
+                            'urban',
+                            default=fieldname,
+                            context=request
+                        )
+                    )
+                )
+        # sort elements by title
+        text_fields = sorted(text_fields, key=lambda name: name[1])
+        vocabulary = SimpleVocabulary([SimpleTerm(d[0], d[0], d[1]) for d in text_fields])
+        return vocabulary
+
+
+EventTextFieldsFactory = EventTextFields()

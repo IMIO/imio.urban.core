@@ -112,7 +112,7 @@ msgstr "Édition du titre"
 
 #: ../contents/eventconfig/content.py:77
 msgid "textDefaultValues"
-msgstr ""
+msgstr "Valeurs par défaut des champs de texte"
 
 #: ../contents/parcelling/content.py:39
 msgid "urban_label_CommunalReference"
