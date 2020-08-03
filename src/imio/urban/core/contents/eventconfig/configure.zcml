@@ -9,4 +9,16 @@
     provides="zope.schema.interfaces.IVocabularyFactory"
   />
 
+  <utility
+    component=".vocabularies.EventOptionalFieldsFactory"
+    name="urban.vocabularies.event_optionalfields"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
+    component=".vocabularies.EventTypesFactory"
+    name="urban.vocabularies.event_types"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
 </configure>

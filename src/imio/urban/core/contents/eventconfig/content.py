@@ -5,17 +5,18 @@ from collective.z3cform.datagridfield import DictRow
 
 from imio.urban.core import _
 
+from plone import api
 from plone.app import textfield
 from plone.autoform import directives as form
 from plone.dexterity.content import Container
-# from plone.formwidget.masterselect import MasterSelectField
+from plone.formwidget.masterselect import MasterSelectField
 from plone.supermodel import model
 
 from z3c.form.browser.orderedselect import OrderedSelectWidget
-from z3c.form.browser.select import SelectWidget
 
 from zope import interface
 from zope import schema
+from zope.component import getUtility
 from zope.interface import implementer
 
 
@@ -29,6 +30,16 @@ class IDefaultTextRowSchema(interface.Interface):
     )
 
     text = textfield.RichText(title=u"Text")
+
+
+def getActivableFields(portal_type):
+    """
+    Vocabulary method for master select widget (not working)
+    """
+    vocabulary = getUtility(schema.interfaces.IVocabularyFactory, 'urban.vocabularies.event_optionalfields')
+    portal = api.portal.get()
+    voc = vocabulary(portal, portal_type)
+    return voc
 
 
 class IEventConfig(model.Schema):
@@ -47,24 +58,35 @@ class IEventConfig(model.Schema):
         required=False,
     )
 
-    form.widget('eventPortalType', SelectWidget)
-    eventPortalType = schema.Choice(
+    # master select not working yet
+    eventPortalType = MasterSelectField(
         title=_(u'eventPortalType'),
         vocabulary='urban.vocabularies.event_portaltypes',
+        slave_fields=(
+            # Controls the vocab of activatedFields
+            {
+                'name': 'activatedFields',
+                'action': 'vocabulary',
+                'vocab_method': getActivableFields,
+                'control_param': 'portal_type',
+            },
+        ),
         required=True,
     )
 
     form.widget('activatedFields', OrderedSelectWidget)
-    activatedFields = schema.Choice(
+    activatedFields = schema.Set(
         title=_(u'activatedFields'),
-        vocabulary='urban.vocabularies.division_names',
+        value_type=schema.Choice(
+            vocabulary='urban.vocabularies.event_optionalfields',
+        ),
         required=True,
     )
 
     form.widget('eventType', OrderedSelectWidget)
     eventType = schema.Choice(
         title=_(u'eventType'),
-        vocabulary='urban.vocabularies.division_names',
+        vocabulary='urban.vocabularies.event_types',
         required=False,
     )
 
@@ -99,3 +121,6 @@ class EventConfig(Container):
     """
     EventConfig class
     """
+
+    def getEventPortalType(self):
+        return getattr(self, 'eventPortalType', '')

@@ -72,7 +72,7 @@ msgstr "Champ(s) activé(s)"
 
 #: ../contents/eventconfig/content.py:50
 msgid "eventDateLabel"
-msgstr "Rennomage du champ 'Date'"
+msgstr "Renommage du champ 'Date'"
 
 #: ../contents/eventconfig/content.py:70
 msgid "eventPortalType"
