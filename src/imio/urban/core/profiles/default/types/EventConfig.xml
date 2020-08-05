@@ -13,7 +13,10 @@
  <property name="link_target"></property>
  <property name="immediate_view">view</property>
  <property name="global_allow">True</property>
- <property name="filter_content_types">False</property>
+ <property name="filter_content_types">True</property>
+ <property name="allowed_content_types">
+   <element value="UrbanTemplate"/>
+ </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">view</property>
  <property name="view_methods">
@@ -25,6 +28,10 @@
  <property name="behaviors">
   <element value="plone.app.lockingbehavior.behaviors.ILocking" />
   <element value="plone.app.dexterity.behaviors.metadata.IBasic" />
+  <element value="plone.app.content.interfaces.INameFromTitle" />
+  <!-- TO REMOVE AFTER UrbanEvent MIGRATED TO DX-->
+  <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
+  <!-- TO REMOVE AFTER UrbanEvent MIGRATED TO DX-->
  </property>
  <property name="schema">imio.urban.core.contents.eventconfig.IEventConfig</property>
  <property name="schema_policy">dexterity</property>

@@ -6,11 +6,14 @@ from collective.z3cform.datagridfield import DictRow
 from imio.urban.core import _
 
 from plone import api
-from plone.app import textfield
 from plone.autoform import directives as form
 from plone.dexterity.content import Container
 from plone.formwidget.masterselect import MasterSelectField
 from plone.supermodel import model
+
+from Products.CMFCore.Expression import Expression
+from Products.PageTemplates.Expressions import getEngine
+from Products.urban.docgen.UrbanTemplate import IUrbanTemplate
 
 from z3c.form.browser.orderedselect import OrderedSelectWidget
 
@@ -18,6 +21,9 @@ from zope import interface
 from zope import schema
 from zope.component import getUtility
 from zope.interface import implementer
+
+import logging
+logger = logging.getLogger('imio.urban.core: EventConfig')
 
 
 class IDefaultTextRowSchema(interface.Interface):
@@ -29,7 +35,9 @@ class IDefaultTextRowSchema(interface.Interface):
         vocabulary='urban.vocabularies.event_text_fields',
     )
 
-    text = textfield.RichText(title=u"Text")
+    text = schema.Text(
+        title=u"Text"
+    )
 
 
 def getActivableFields(portal_type):
@@ -135,6 +143,8 @@ class EventConfig(Container):
         return self.activatedFields or []
 
     def getEventType(self):
+        if type(self.eventType) is str:
+            return [self.eventType]
         return self.eventType or []
 
     def getIsKeyEvent(self):
@@ -148,3 +158,50 @@ class EventConfig(Container):
 
     def getTextDefaultValues(self):
         return self.textDefaultValues or []
+
+    def getTemplates(self):
+        """
+        Return contained POD templates.
+        """
+        templates = [obj for obj in self.objectValues() if IUrbanTemplate.providedBy(obj)]
+        return templates
+
+    def getLinkedUrbanEvents(self):
+        """
+        Return all the urban events linked to this urban event type.
+        """
+        ref_catalog = api.portal.get_tool('reference_catalog')
+        ref_brains = ref_catalog(targetUID=self.UID())
+        urban_events = [ref_brain.getObject().getSourceObject() for ref_brain in ref_brains]
+        return urban_events
+
+    def canBeCreatedInLicence(self, obj):
+        """
+        Creation condition
+
+        computed by evaluating the TAL expression stored in TALCondition field
+        """
+        res = True  # At least for now
+        # Check condition
+        TALCondition = self.getTALCondition().strip()
+        if TALCondition:
+            data = {
+                'nothing': None,
+                'portal': api.portal.get(),
+                'object': obj,
+                'event': self,
+                'request': api.portal.getRequest(),
+                'here': obj,
+                'licence': obj,
+            }
+            ctx = getEngine().getContext(data)
+            try:
+                res = Expression(TALCondition)(ctx)
+            except Exception, e:
+                logger.warn("The condition '%s' defined for element at '%s' is wrong!  Message is : %s" % (TALCondition, obj.absolute_url(), e))
+                res = False
+        return res
+
+    def checkCreationInLicence(self, obj):
+        if not self.canBeCreatedInLicence(obj):
+            raise ValueError(_("You can not create this UrbanEvent !"))

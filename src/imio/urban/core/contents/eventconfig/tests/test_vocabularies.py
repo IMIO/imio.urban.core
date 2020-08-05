@@ -35,7 +35,7 @@ class TestInstall(IntegrationTestCase):
         self.assertEquals(set(voc.by_value), expected_types)
         # when called on a licenceConfig should only return the types in
         # the allowed contenttypes of the licence
-        voc = vocabulary(self.portal.portal_urban.codt_buildlicence.urbaneventtypes)
+        voc = vocabulary(self.portal.portal_urban.codt_buildlicence.eventconfigs)
         expected_types = set([
             'UrbanEvent',
             'UrbanEventInquiry',
@@ -44,7 +44,7 @@ class TestInstall(IntegrationTestCase):
         ])
         self.assertEquals(set(voc.by_value), expected_types)
 
-        voc = vocabulary(self.portal.portal_urban.buildlicence.urbaneventtypes)
+        voc = vocabulary(self.portal.portal_urban.buildlicence.eventconfigs)
         expected_types = set([
             'UrbanEvent',
             'UrbanEventInquiry',
@@ -52,7 +52,7 @@ class TestInstall(IntegrationTestCase):
         ])
         self.assertEquals(set(voc.by_value), expected_types)
 
-        voc = vocabulary(self.portal.portal_urban.inspection.urbaneventtypes)
+        voc = vocabulary(self.portal.portal_urban.inspection.eventconfigs)
         expected_types = set([
             'UrbanEvent',
             'UrbanEventInspectionReport',
