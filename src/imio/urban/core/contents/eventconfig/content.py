@@ -8,7 +8,6 @@ from imio.urban.core import _
 from plone import api
 from plone.autoform import directives as form
 from plone.dexterity.content import Container
-from plone.formwidget.masterselect import MasterSelectField
 from plone.supermodel import model
 
 from Products.CMFCore.Expression import Expression
@@ -66,24 +65,15 @@ class IEventConfig(model.Schema):
         required=False,
     )
 
-    # master select not working yet
-    eventPortalType = MasterSelectField(
+    eventPortalType = schema.Choice(
         title=_(u'eventPortalType'),
         vocabulary='urban.vocabularies.event_portaltypes',
-        slave_fields=(
-            # Controls the vocab of activatedFields
-            {
-                'name': 'activatedFields',
-                'action': 'vocabulary',
-                'vocab_method': getActivableFields,
-                'control_param': 'portal_type',
-            },
-        ),
         required=True,
+        default='UrbanEvent',
     )
 
     form.widget('activatedFields', OrderedSelectWidget)
-    activatedFields = schema.Set(
+    activatedFields = schema.Tuple(
         title=_(u'activatedFields'),
         value_type=schema.Choice(
             vocabulary='urban.vocabularies.event_optionalfields',
@@ -92,9 +82,11 @@ class IEventConfig(model.Schema):
     )
 
     form.widget('eventType', OrderedSelectWidget)
-    eventType = schema.Choice(
+    eventType = schema.Tuple(
         title=_(u'eventType'),
-        vocabulary='urban.vocabularies.event_types',
+        value_type=schema.Choice(
+            vocabulary='urban.vocabularies.event_types',
+        ),
         required=False,
     )
 
@@ -105,9 +97,11 @@ class IEventConfig(model.Schema):
     )
 
     form.widget('keyDates', OrderedSelectWidget)
-    keyDates = schema.Choice(
+    keyDates = schema.Tuple(
         title=_(u'keyDates'),
-        vocabulary='urban.vocabularies.event_enabled_dates',
+        value_type=schema.Choice(
+            vocabulary='urban.vocabularies.event_enabled_dates',
+        ),
         required=False,
     )
 
@@ -140,18 +134,18 @@ class EventConfig(Container):
         return self.eventPortalType or u''
 
     def getActivatedFields(self):
-        return self.activatedFields or []
+        return self.activatedFields or ()
 
     def getEventType(self):
-        if type(self.eventType) is str:
-            return [self.eventType]
-        return self.eventType or []
+        if type(self.eventType) in (str, unicode):
+            return (self.eventType,)
+        return self.eventType or ()
 
     def getIsKeyEvent(self):
         return self.isKeyEvent or False
 
     def getKeyDates(self):
-        return self.keyDates or []
+        return self.keyDates or ()
 
     def getTALCondition(self):
         return self.TALCondition or u''

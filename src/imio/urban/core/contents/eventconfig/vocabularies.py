@@ -152,7 +152,9 @@ class EventKeyDates(EventConfigVocabulary):
             is_date_field = field.getType() == 'Products.Archetypes.Field.DateTimeField'
             if is_date_field:
                 fieldname = field.getName()
-                if getattr(field, 'optional', False) and fieldname in enabled_fields:
+                enabled = fieldname in enabled_fields
+                base_date = fieldname == 'eventDate'
+                if getattr(field, 'optional', False) and enabled or base_date:
                     date_fields.append(
                         (
                             fieldname,
