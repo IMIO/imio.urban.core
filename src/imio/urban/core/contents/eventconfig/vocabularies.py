@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from imio.urban.core.contents.eventconfig import IEventConfig
-from imio.urban.core.utils import get_portal_type_class
+from imio.urban.core.contents.utils import get_portal_type_class
 
 from plone import api
 
@@ -74,9 +74,9 @@ EventPortalTypesVocabularyFactory = EventPortalTypesVocabulary()
 
 class EventOptionalFields(EventConfigVocabulary):
     """
-    List all the possible optional fields.
-    Only implemented for AT UrbanEvent, to reimplements once
-    UrbanEvent are migrated to DX.
+    List all the possible optional fields, the list depends on the EventConfig
+    eventPortalType field value.
+    [DX] to reimplements once UrbanEvent are migrated to DX! [DX]
     """
 
     def __call__(self, context, event_portaltype=''):
@@ -178,13 +178,15 @@ EventKeyDatesFactory = EventKeyDates()
 class EventTextFields(EventConfigVocabulary):
     """
     List all the possible text fields.
+    [DX] implemented for AT.TextField, to rewrite once UrbanEvent is migrated to DX [DX]
     """
 
     def __call__(self, context):
         request = api.portal.getRequest()
         # hack to get the eventConfig as context, since context is <NO_VALUE> in a
         # datagrid
-        context = request.PARENTS[0]
+        if not IEventConfig.providedBy(context):
+            context = request.PARENTS[0]
         event_portaltype = self.get_event_portaltype(context)
         klass = get_portal_type_class(event_portaltype)
         all_fields = klass.schema.getSchemataFields('default')
