@@ -1,0 +1,36 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="imio.urban.core">
+
+  <utility
+    component=".vocabularies.EventPortalTypesVocabularyFactory"
+    name="urban.vocabularies.event_portaltypes"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
+    component=".vocabularies.EventOptionalFieldsFactory"
+    name="urban.vocabularies.event_optionalfields"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
+    component=".vocabularies.EventTypesFactory"
+    name="urban.vocabularies.event_types"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
+  component=".vocabularies.EventKeyDatesFactory"
+    name="urban.vocabularies.event_enabled_dates"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
+  component=".vocabularies.EventTextFieldsFactory"
+    name="urban.vocabularies.event_text_fields"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+</configure>

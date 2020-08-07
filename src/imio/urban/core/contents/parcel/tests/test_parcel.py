@@ -17,7 +17,7 @@ import unittest2 as unittest
 
 
 class TestInstall(IntegrationTestCase):
-    """Test installation of imio.urban.core into Plone."""
+    """Test installation of Parcel."""
 
     def setUp(self):
         """Custom shared utility setup for tests."""

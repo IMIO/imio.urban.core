@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-07-17 12:31+0000\n"
+"POT-Creation-Date: 2020-07-27 14:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,15 +18,15 @@ msgstr ""
 msgid "Base preinstall profile for imio.urban.core."
 msgstr ""
 
-#: ../contents/parcel/content.py:48
+#: ../contents/parcel/content.py:43
 msgid "Bis"
 msgstr "Bis"
 
-#: ../contents/parcel/content.py:29
+#: ../contents/parcel/content.py:27
 msgid "Division"
 msgstr "Division"
 
-#: ../contents/parcel/content.py:54
+#: ../contents/parcel/content.py:48
 msgid "Exposant"
 msgstr "Exposant"
 
@@ -34,33 +34,53 @@ msgstr "Exposant"
 msgid "Installs the imio.urban.core add-on."
 msgstr ""
 
-#: ../contents/parcel/content.py:73
+#: ../contents/parcel/content.py:65
 msgid "Isofficialparcel"
 msgstr "Parcelle officielle"
 
-#: ../contents/parcel/content.py:80
+#: ../contents/parcel/content.py:71
 msgid "Outdated"
 msgstr "Ancienne parcelle"
 
-#: ../contents/parcel/content.py:66
+#: ../contents/parcel/content.py:58
 msgid "Partie"
 msgstr "Partie"
 
-#: ../contents/parcel/content.py:60
+#: ../contents/parcel/content.py:53
 msgid "Puissance"
 msgstr "Puissance"
 
-#: ../contents/parcel/content.py:42
+#: ../contents/parcel/content.py:38
 msgid "Radical"
 msgstr "Radical"
 
-#: ../contents/parcel/content.py:36
+#: ../contents/parcel/content.py:33
 msgid "Section"
 msgstr "Section"
 
 #: ../testing.zcml:14
 msgid "Steps to ease tests of imio.urban.core"
 msgstr ""
+
+#: ../contents/eventconfig/content.py:39
+msgid "TALCondition"
+msgstr "Condition TAL"
+
+#: ../contents/eventconfig/content.py:56
+msgid "activatedFields"
+msgstr "Champ(s) activé(s)"
+
+#: ../contents/eventconfig/content.py:50
+msgid "eventDateLabel"
+msgstr "Renommage du champ 'Date'"
+
+#: ../contents/eventconfig/content.py:70
+msgid "eventPortalType"
+msgstr "Type de contenu de l'événement"
+
+#: ../contents/eventconfig/content.py:63
+msgid "eventType"
+msgstr "Marqueur/type d'événement"
 
 #: ../profiles.zcml:22
 msgid "imio.urban.core"
@@ -74,42 +94,58 @@ msgstr ""
 msgid "imio.urban.core-preinstall"
 msgstr ""
 
-#: ../contents/parcelling/content.py:44
+#: ../contents/eventconfig/content.py:83
+msgid "isKeyEvent"
+msgstr "Événement clé"
+
+#: ../contents/eventconfig/content.py:90
+msgid "keyDates"
+msgstr "Dates clés"
+
+#: ../actionspanel/views.py:44
+msgid "object_deleted"
+msgstr ""
+
+#: ../contents/eventconfig/content.py:44
+msgid "showTitle"
+msgstr "Édition du titre"
+
+#: ../contents/eventconfig/content.py:77
+msgid "textDefaultValues"
+msgstr "Valeurs par défaut des champs de texte"
+
+#: ../contents/parcelling/content.py:39
 msgid "urban_label_CommunalReference"
 msgstr "Référence communale"
 
-#: ../contents/parcelling/content.py:49
+#: ../contents/parcelling/content.py:44
 msgid "urban_label_DGO4Reference"
 msgstr "Référence de la région wallone"
 
-#: ../contents/parcelling/content.py:39
+#: ../contents/parcelling/content.py:34
 msgid "urban_label_approvalDate"
 msgstr "Date d'approbation"
 
-#: ../contents/parcelling/content.py:34
+#: ../contents/parcelling/content.py:29
 msgid "urban_label_authorizationDate"
 msgstr "Date d'autorisation"
 
-#: ../contents/parcelling/content.py:59
+#: ../contents/parcelling/content.py:54
 msgid "urban_label_changesDescription"
 msgstr "Modifications du lotissement"
 
-#: ../contents/parcelling/content.py:24
+#: ../contents/parcelling/content.py:19
 msgid "urban_label_label"
 msgstr "Libellé"
 
-#: ../contents/parcelling/content.py:54
+#: ../contents/parcelling/content.py:49
 msgid "urban_label_numberOfParcels"
 msgstr "Nombre de lots"
 
-#: ../contents/parcel/content.py:81
+#: ../contents/parcel/content.py:72
 msgid "urban_label_outdated"
 msgstr "la parcelle a-t-elle été renommée/fusionnée/divisée"
 
-#: ../contents/parcelling/content.py:29
+#: ../contents/parcelling/content.py:24
 msgid "urban_label_subdividerName"
 msgstr "Nom du lotisseur"
-
-#: ../contents/parcelling/content.py:19
-msgid "urban_label_title"
-msgstr "Titre"

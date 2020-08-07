@@ -9,9 +9,7 @@ from plone.supermodel import model
 
 from Products.urban import services
 
-from z3c.form.browser.checkbox import SingleCheckBoxWidget
 from z3c.form.browser.select import SelectWidget
-from z3c.form.browser.text import TextWidget
 
 from zope.component import getUtility
 from zope.interface import implementer
@@ -21,7 +19,7 @@ from zope import schema
 
 class IParcel(model.Schema):
     """
-    Parcel dexterity schema.
+    Parcel zope schema.
     """
 
     form.widget('division', SelectWidget)
@@ -31,37 +29,31 @@ class IParcel(model.Schema):
         required=True,
     )
 
-    form.widget('section', TextWidget)
     section = schema.TextLine(
         title=_(u'Section'),
         required=True,
     )
 
-    form.widget('radical', TextWidget)
     radical = schema.TextLine(
         title=_(u'Radical'),
         required=False,
     )
 
-    form.widget('bis', TextWidget)
     bis = schema.TextLine(
         title=_(u'Bis'),
         required=False,
     )
 
-    form.widget('exposant', TextWidget)
     exposant = schema.TextLine(
         title=_(u'Exposant'),
         required=False,
     )
 
-    form.widget('puissance', TextWidget)
     puissance = schema.TextLine(
         title=_(u'Puissance'),
         required=False,
     )
 
-    form.widget('partie', SingleCheckBoxWidget)
     partie = schema.Bool(
         title=_(u'Partie'),
         default=False,
@@ -75,7 +67,6 @@ class IParcel(model.Schema):
         required=False,
     )
 
-    form.widget('outdated', SingleCheckBoxWidget)
     outdated = schema.Bool(
         title=_(u'Outdated'),
         description=_(u'urban_label_outdated'),
@@ -87,7 +78,7 @@ class IParcel(model.Schema):
 @implementer(IParcel)
 class Parcel(Item):
     """
-    Parcel dexterity class.
+    Parcel class.
     """
 
     def Title(self):

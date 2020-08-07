@@ -12,7 +12,7 @@ from zope.interface import implementer
 
 class IParcelling(model.Schema):
     """
-    Parcelling dexterity schema.
+    Parcelling zope schema.
     """
 
     label = schema.TextLine(
@@ -59,7 +59,7 @@ class IParcelling(model.Schema):
 @implementer(IParcelling)
 class Parcelling(Item):
     """
-    Parcelling dexterity class.
+    Parcelling class.
     """
 
     def getLabel(self):
