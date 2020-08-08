@@ -137,8 +137,6 @@ class EventConfig(Container):
         return self.activatedFields or ()
 
     def getEventType(self):
-        if type(self.eventType) in (str, unicode):
-            return (self.eventType,)
         return self.eventType or ()
 
     def getIsKeyEvent(self):
