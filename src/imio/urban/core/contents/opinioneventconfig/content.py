@@ -20,36 +20,43 @@ class IOpinionEventConfig(IEventConfig):
     OpinionEventConfig zope schema.
     """
 
+    form.order_after(recipientName='IBasic.description')
     recipientName = schema.TextLine(
         title=_(u'recipientName'),
         required=False,
     )
 
+    form.order_after(function_department='recipientName')
     function_department = schema.TextLine(
         title=_(u'function_department'),
         required=False,
     )
 
+    form.order_after(organization='function_department')
     organization = schema.TextLine(
         title=_(u'organization'),
         required=False,
     )
 
+    form.order_after(dispatchInformation='organization')
     dispatchInformation = schema.TextLine(
         title=_(u'dispatchInformation'),
         required=False,
     )
 
+    form.order_after(typeAndStreetName_number_box='dispatchInformation')
     typeAndStreetName_number_box = schema.TextLine(
         title=_(u'typeAndStreetName_number_box'),
         required=False,
     )
 
+    form.order_after(postcode_locality='typeAndStreetName_number_box')
     postcode_locality = schema.TextLine(
         title=_(u'postcode_locality'),
         required=False,
     )
 
+    form.order_after(country='postcode_locality')
     country = schema.TextLine(
         title=_(u'country'),
         required=False,

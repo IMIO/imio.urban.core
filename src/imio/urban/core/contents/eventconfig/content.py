@@ -54,12 +54,14 @@ class IEventConfig(model.Schema):
     EventConfig zope schema.
     """
 
+    form.order_after(showTitle='IBasic.title')
     showTitle = schema.Bool(
         title=_(u'showTitle'),
         default=False,
         required=False,
     )
 
+    form.order_after(eventDateLabel='showTitle')
     eventDateLabel = schema.TextLine(
         title=_(u'eventDateLabel'),
         required=False,
