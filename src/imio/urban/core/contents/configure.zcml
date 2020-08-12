@@ -4,6 +4,7 @@
 
     <include package=".eventconfig" />
     <include package=".indexes" />
+    <include package=".opinioneventconfig" />
     <include package=".parcel" />
     <include package=".parcelling" />
 
