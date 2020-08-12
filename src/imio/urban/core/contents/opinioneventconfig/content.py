@@ -84,6 +84,36 @@ class OpinionEventConfig(EventConfig):
     OpinionEventConfig class
     """
 
+    def getRecipientName(self):
+        return self.recipientName or u''
+
+    def getFunction_department(self):
+        return self.function_department or u''
+
+    def getOrganization(self):
+        return self.organization or u''
+
+    def getDispatchInformation(self):
+        return self.dispatchInformation or u''
+
+    def getTypeAndStreetName_number_box(self):
+        return self.typeAndStreetName_number_box or u''
+
+    def getPostcode_locality(self):
+        return self.postcode_locality or u''
+
+    def getCountry(self):
+        return self.country or u''
+
+    def getIs_internal_service(self):
+        return self.is_internal_service or False
+
+    def getInternal_service(self):
+        return self.internal_service or u''
+
+    def getExternal_directions(self):
+        return self.external_directions or ()
+
     def mayAddOpinionRequestEvent(self, inquiry):
         """
         This is used as TALExpression for the UrbanEventOpinionRequest
