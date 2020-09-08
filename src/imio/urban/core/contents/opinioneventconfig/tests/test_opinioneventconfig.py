@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 
+from Acquisition import aq_base
+
 from imio.urban.core.testing import IntegrationTestCase
 
 from plone import api
 from plone.app.testing import login
-from Products.urban.interfaces import IUrbanEvent
 from Products.urban.testing import URBAN_TESTS_LICENCES
+
+from zope.event import notify
+from zope.lifecycleevent import ObjectCreatedEvent
 
 import unittest
 
@@ -38,17 +42,42 @@ class TestUrbanEventTypes(unittest.TestCase):
         self.portal_setup = portal.portal_setup
         self.catalog = api.portal.get_tool('portal_catalog')
         buildlicence_brains = self.catalog(portal_type='BuildLicence', Title='Exemple Permis Urbanisme')
-        self.buildlicence = buildlicence_brains[0].getObject()
+        self.licence = buildlicence_brains[0].getObject()
         self.event_configs = self.portal_urban.buildlicence.eventconfigs
 
-    def test_getLinkedUrbanEvents(self):
+    def testNewOpinioneventtypeAppearsInFieldVocabulary(self):
         """
-        For each OpinionEventConfig, at least one event should have been created and can be found
-        with 'getLinkedUrbanEvents' method.
+        when adding a new OpinionEventConfig, its extraValue should be
+        used as the display value in the vocabulary of solicitOpinions field
+        of buildlicences
         """
-        for event_config in self.event_configs.objectValues():
-            linked_urbanevents = event_config.getLinkedUrbanEvents()
-            if event_config.canBeCreatedInLicence(self.buildlicence):
-                self.assertEqual(len(linked_urbanevents), 1)
-                self.assertEqual(linked_urbanevents[0].getUrbaneventtypes(), event_config)
-                self.assertTrue(IUrbanEvent.providedBy(linked_urbanevents[0]))
+        tool = api.portal.get_tool('portal_urban')
+        eventconfigs_folder = tool.buildlicence.eventconfigs
+
+        with api.env.adopt_roles(['Manager']):
+            term_id = eventconfigs_folder.invokeFactory('OpinionEventConfig', id='voodoo', title="Demande d'avis (Vood00)", abbreviation='Vood00')
+            voc_cache = tool.restrictedTraverse('urban_vocabulary_cache')
+            voc_cache.update_procedure_all_vocabulary_cache(tool.buildlicence)
+        term = getattr(tool.buildlicence.eventconfigs, term_id)
+        expected_voc_term = (term_id, term.abbreviation)
+
+        solicitOpinions_field = self.licence.getField('solicitOpinionsTo')
+        field_voc = solicitOpinions_field.vocabulary.getDisplayList(self.licence)
+
+        self.assertIn(expected_voc_term, field_voc.items())
+
+    def testInquiryWithOpinionRequestIsLinkedToItsUrbanEventOpinionRequest(self):
+        """
+        if there is an inquiry with an opinion request and that its corresponding UrbanEventOpinionRequest
+        is added, a link should be created between this inquiry and this UrbanEventOpinionRequest
+        """
+
+        licence = self.licence
+        UrbanEventOpinionRequest = None
+        for content in licence.objectValues():
+            if content.portal_type == 'UrbanEventOpinionRequest':
+                UrbanEventOpinionRequest = content
+                aq_base(UrbanEventOpinionRequest)._at_creation_flag = True
+                break
+        notify(ObjectCreatedEvent(UrbanEventOpinionRequest))
+        self.failUnless(licence.getLinkedUrbanEventOpinionRequest('belgacom') == UrbanEventOpinionRequest)

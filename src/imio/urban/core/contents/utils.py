@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from plone import api
+from plone.behavior.interfaces import IBehavior
+from plone.dexterity.interfaces import IDexterityFTI
+
+from zope.component import getUtility
 
 
 def get_portal_type_class(portal_type):
@@ -26,3 +30,16 @@ def get_portal_type_class(portal_type):
             return
         klass = module[0]['klass']
     return klass
+
+
+def get_fields(dx_object):
+    fti = getUtility(IDexterityFTI, name=dx_object.portal_type)
+    fti_schema = fti.lookupSchema()
+    fields = [(n, f) for n, f in fti_schema.namesAndDescriptions(all=True)]
+
+    # also lookup behaviors
+    for behavior_id in fti.behaviors:
+        behavior = getUtility(IBehavior, behavior_id).interface
+        fields.extend([(n, f) for n, f in behavior.namesAndDescriptions(all=True)])
+
+    return fields

@@ -3,7 +3,10 @@
 from imio.urban.core import _
 from imio.urban.core.contents.eventconfig import EventConfig
 from imio.urban.core.contents.eventconfig import IEventConfig
+from imio.urban.core.contents.utils import get_fields
+from Products.urban.interfaces import IUrbanConfigurationValue
 
+from plone import api
 from plone.autoform import directives as form
 
 from z3c.form.browser.orderedselect import OrderedSelectWidget
@@ -15,12 +18,18 @@ import logging
 logger = logging.getLogger('imio.urban.core: OpinionEventConfig')
 
 
-class IOpinionEventConfig(IEventConfig):
+class IOpinionEventConfig(IEventConfig, IUrbanConfigurationValue):
     """
     OpinionEventConfig zope schema.
     """
 
-    form.order_after(recipientName='IBasic.description')
+    form.order_after(abbreviation='IBasic.description')
+    abbreviation = schema.TextLine(
+        title=_(u'abbreviation'),
+        required=False,
+    )
+
+    form.order_after(recipientName='abbreviation')
     recipientName = schema.TextLine(
         title=_(u'recipientName'),
         required=False,
@@ -91,6 +100,15 @@ class OpinionEventConfig(EventConfig):
     OpinionEventConfig class
     """
 
+    def get_abbreviation(self):
+        return self.abbreviation or u''
+
+    def getExtraValue(self):
+        """
+        Backward compatibility.
+        """
+        return self.get_abbreviation()
+
     def getRecipientName(self):
         return self.recipientName or u''
 
@@ -118,8 +136,8 @@ class OpinionEventConfig(EventConfig):
     def getInternal_service(self):
         return self.internal_service or u''
 
-    def getExternal_directions(self):
-        return self.external_directions or ()
+    def getExternalDirections(self):
+        return self.externalDirections or ()
 
     def mayAddOpinionRequestEvent(self, inquiry):
         """
@@ -129,3 +147,20 @@ class OpinionEventConfig(EventConfig):
         """
         may_add = inquiry.mayAddOpinionRequestEvent(self.id)
         return may_add
+
+    def to_dict(self):
+        dict_ = {
+            'id': self.id,
+            'UID': self.UID(),
+            'enabled': api.content.get_state(self) == 'enabled',
+            'portal_type': self.portal_type,
+            'title': self.title,
+        }
+        for field_name, field in get_fields(self):
+            val = getattr(self, field_name)
+            if val is None:
+                val = u''
+            if type(val) is str:
+                val = val.decode('utf8')
+            dict_[field_name] = val
+        return dict_
