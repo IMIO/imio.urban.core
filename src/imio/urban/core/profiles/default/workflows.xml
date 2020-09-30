@@ -4,6 +4,9 @@
    <type type_id="EventConfig">
      <bound-workflow workflow_id="activation_workflow" />
    </type>
+   <type type_id="FollowUpEventConfig">
+     <bound-workflow workflow_id="activation_workflow" />
+   </type>
    <type type_id="OpinionEventConfig">
      <bound-workflow workflow_id="activation_workflow" />
    </type>

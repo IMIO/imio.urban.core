@@ -199,3 +199,9 @@ class EventConfig(Container):
     def checkCreationInLicence(self, obj):
         if not self.canBeCreatedInLicence(obj):
             raise ValueError(_("You can not create this UrbanEvent !"))
+
+    def mayAddInspectionReportEvent(self, licence):
+        """
+        """
+        may_add = licence.mayAddInspectionReportEvent()
+        return may_add

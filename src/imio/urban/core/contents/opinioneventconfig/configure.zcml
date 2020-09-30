@@ -4,6 +4,11 @@
     i18n_domain="imio.urban.core">
 
   <utility
+    factory=".content.OpinionEventConfigSchemaPolicy"
+    name="schema_policy_opinioneventconfig"
+  />
+
+  <utility
     component=".vocabularies.InternalServicesFactory"
     name="urban.vocabularies.internal_services"
     provides="zope.schema.interfaces.IVocabularyFactory"
