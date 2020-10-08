@@ -26,9 +26,9 @@ def get_portal_type_class(portal_type):
         at_tool = api.portal.get_tool('archetype_tool')
         module = [at_def for at_def in at_tool.listRegisteredTypes()
                   if at_def['portal_type'] == type_definition.id]
-        if not module:
-            return
-        klass = module[0]['klass']
+        module = module or [at_def for at_def in at_tool.listRegisteredTypes()
+                            if at_def['meta_type'] == type_definition.content_meta_type]
+        klass = module and module[0]['klass']
     return klass
 
 
