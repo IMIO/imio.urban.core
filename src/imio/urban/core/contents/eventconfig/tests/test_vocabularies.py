@@ -34,6 +34,9 @@ class TestInstall(IntegrationTestCase):
             'UrbanEventInspectionReport',
             'UrbanEventFollowUp',
             'UrbanEventOpinionRequest',
+            'UrbanEventMayor',
+            'UrbanEventNotificationCollege',
+            'UrbanEventCollege',
         ])
         self.assertEqual(set(voc.by_value), expected_types)
         # when called on a licenceConfig should only return the types in
@@ -44,6 +47,8 @@ class TestInstall(IntegrationTestCase):
             'UrbanEventInquiry',
             'UrbanEventAnnouncement',
             'UrbanEventOpinionRequest',
+            'UrbanEventNotificationCollege',
+            'UrbanEventCollege',
         ])
         self.assertEqual(set(voc.by_value), expected_types)
 
@@ -52,6 +57,18 @@ class TestInstall(IntegrationTestCase):
             'UrbanEvent',
             'UrbanEventInquiry',
             'UrbanEventOpinionRequest',
+            'UrbanEventNotificationCollege',
+            'UrbanEventCollege',
+        ])
+        self.assertEqual(set(voc.by_value), expected_types)
+
+        voc = vocabulary(self.portal.portal_urban.envclassone.eventconfigs)
+        expected_types = set([
+            'UrbanEvent',
+            'UrbanEventInquiry',
+            'UrbanEventOpinionRequest',
+            'UrbanEventMayor',
+            'UrbanEventCollege',
         ])
         self.assertEqual(set(voc.by_value), expected_types)
 
