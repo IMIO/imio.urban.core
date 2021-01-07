@@ -1,0 +1,23 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="imio.urban.core">
+
+  <utility
+    factory=".content.OpinionEventConfigSchemaPolicy"
+    name="schema_policy_opinioneventconfig"
+  />
+
+  <utility
+    component=".vocabularies.InternalServicesFactory"
+    name="urban.vocabularies.internal_services"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
+    component=".vocabularies.ExternalDirectionsFactory"
+    name="urban.vocabularies.external_directions"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+</configure>

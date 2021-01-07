@@ -54,12 +54,14 @@ class IEventConfig(model.Schema):
     EventConfig zope schema.
     """
 
+    form.order_after(showTitle='IBasic.title')
     showTitle = schema.Bool(
         title=_(u'showTitle'),
         default=False,
         required=False,
     )
 
+    form.order_after(eventDateLabel='showTitle')
     eventDateLabel = schema.TextLine(
         title=_(u'eventDateLabel'),
         required=False,
@@ -137,8 +139,6 @@ class EventConfig(Container):
         return self.activatedFields or ()
 
     def getEventType(self):
-        if type(self.eventType) in (str, unicode):
-            return (self.eventType,)
         return self.eventType or ()
 
     def getIsKeyEvent(self):
@@ -199,3 +199,9 @@ class EventConfig(Container):
     def checkCreationInLicence(self, obj):
         if not self.canBeCreatedInLicence(obj):
             raise ValueError(_("You can not create this UrbanEvent !"))
+
+    def mayAddInspectionReportEvent(self, licence):
+        """
+        """
+        may_add = licence.mayAddInspectionReportEvent()
+        return may_add

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-07-27 14:11+0000\n"
+"POT-Creation-Date: 2020-09-29 08:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,25 +62,49 @@ msgstr "Section"
 msgid "Steps to ease tests of imio.urban.core"
 msgstr ""
 
-#: ../contents/eventconfig/content.py:39
+#: ../contents/eventconfig/content.py:111
 msgid "TALCondition"
 msgstr "Condition TAL"
 
-#: ../contents/eventconfig/content.py:56
+#: ../contents/eventconfig/content.py:201
+msgid "You can not create this UrbanEvent !"
+msgstr "Vous ne pouvez pas créer cet événement!"
+
+#: ../contents/opinioneventconfig/content.py:28
+msgid "abbreviation"
+msgstr "Titre abrégé"
+
+#: ../contents/eventconfig/content.py:79
 msgid "activatedFields"
 msgstr "Champ(s) activé(s)"
 
-#: ../contents/eventconfig/content.py:50
+#: ../contents/opinioneventconfig/content.py:70
+msgid "country"
+msgstr "Pays"
+
+#: ../contents/opinioneventconfig/content.py:52
+msgid "dispatchInformation"
+msgstr "Informations de dispatch"
+
+#: ../contents/eventconfig/content.py:66
 msgid "eventDateLabel"
 msgstr "Renommage du champ 'Date'"
 
-#: ../contents/eventconfig/content.py:70
+#: ../contents/eventconfig/content.py:71
 msgid "eventPortalType"
 msgstr "Type de contenu de l'événement"
 
-#: ../contents/eventconfig/content.py:63
+#: ../contents/eventconfig/content.py:88
 msgid "eventType"
 msgstr "Marqueur/type d'événement"
+
+#: ../contents/opinioneventconfig/content.py:89
+msgid "externalDirections"
+msgstr "Directions extérieures concernées"
+
+#: ../contents/opinioneventconfig/content.py:40
+msgid "function_department"
+msgstr "Fonction, Département"
 
 #: ../profiles.zcml:22
 msgid "imio.urban.core"
@@ -94,11 +118,23 @@ msgstr ""
 msgid "imio.urban.core-preinstall"
 msgstr ""
 
-#: ../contents/eventconfig/content.py:83
+#: ../contents/opinioneventconfig/content.py:81
+msgid "internal_service"
+msgstr "Service interne à la ville"
+
+#: ../contents/schemas/vocabulary_term.py:18
+msgid "isDefaultValue"
+msgstr "Est une valeur par défaut"
+
+#: ../contents/eventconfig/content.py:96
 msgid "isKeyEvent"
 msgstr "Événement clé"
 
-#: ../contents/eventconfig/content.py:90
+#: ../contents/opinioneventconfig/content.py:75
+msgid "is_internal_service"
+msgstr "Réponse via service interne à la ville"
+
+#: ../contents/eventconfig/content.py:103
 msgid "keyDates"
 msgstr "Dates clés"
 
@@ -106,13 +142,29 @@ msgstr "Dates clés"
 msgid "object_deleted"
 msgstr ""
 
-#: ../contents/eventconfig/content.py:44
+#: ../contents/opinioneventconfig/content.py:46
+msgid "organization"
+msgstr "Organisation"
+
+#: ../contents/opinioneventconfig/content.py:64
+msgid "postcode_locality"
+msgstr "Code postal et localité"
+
+#: ../contents/opinioneventconfig/content.py:34
+msgid "recipientName"
+msgstr "Nom du destinataire"
+
+#: ../contents/eventconfig/content.py:59
 msgid "showTitle"
 msgstr "Édition du titre"
 
-#: ../contents/eventconfig/content.py:77
+#: ../contents/eventconfig/content.py:117
 msgid "textDefaultValues"
 msgstr "Valeurs par défaut des champs de texte"
+
+#: ../contents/opinioneventconfig/content.py:58
+msgid "typeAndStreetName_number_box"
+msgstr "Type et nom de rue, numéro et boîte"
 
 #: ../contents/parcelling/content.py:39
 msgid "urban_label_CommunalReference"

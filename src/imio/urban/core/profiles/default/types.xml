@@ -3,6 +3,10 @@
         meta_type="Plone Types Tool">
  <object name="EventConfig"
          meta_type="Dexterity FTI"/>
+ <object name="FollowUpEventConfig"
+         meta_type="Dexterity FTI"/>
+ <object name="OpinionEventConfig"
+         meta_type="Dexterity FTI"/>
  <object name="Parcel"
          meta_type="Dexterity FTI"/>
  <object name="Parcelling"
