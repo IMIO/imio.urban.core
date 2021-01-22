@@ -49,6 +49,14 @@ class TestParcellingIntegration(IntegrationTestCase):
         self.assertEquals(parcelling.authorizationDate, date(2005, 1, 1))
         self.assertEquals(parcelling.numberOfParcels, 10)
 
+    def test_parcelling_allowed_types(self):
+        portal = self.layer['portal']
+        parcellings = portal.urban.parcellings.objectValues()
+        self.assertEquals(len(parcellings), 1)
+        parcelling = parcellings[0]
+        login(self.portal, 'urbaneditor')
+        self.assertEquals(parcelling.allowedContentTypes()[0].getId(), 'Parcel')
+
     def test_parcelling_title(self):
         portal = self.layer['portal']
         parcellings = portal.urban.parcellings.objectValues()
