@@ -64,6 +64,31 @@ class TestParcellingIntegration(IntegrationTestCase):
         parcelling = parcellings[0]
         self.assertEquals(parcelling.Title(), 'Lotissement 1 (André Ledieu - 01/01/2005 - 12/01/2005)')
 
+    def test_parcelling_title_with_parcels(self):
+        portal = self.layer['portal']
+        parcellings = portal.urban.parcellings.objectValues()
+        self.assertEquals(len(parcellings), 1)
+        parcelling = parcellings[0]
+        self.assertEquals(parcelling.Title(), 'Lotissement 1 (André Ledieu - 01/01/2005 - 12/01/2005)')
+        login(self.portal, 'urbaneditor')
+        parcel_1 = api.content.create(
+            container=parcelling, type='Parcel', id='parcel1',
+            division=u'A', section=u'B', radical=u'6', exposant=u'D'
+        )
+        self.assertIn("A B 6", parcelling.Title())
+
+    def test_get_parcels_method(self):
+        portal = self.layer['portal']
+        parcellings = portal.urban.parcellings.objectValues()
+        self.assertEquals(len(parcellings), 1)
+        parcelling = parcellings[0]
+        login(self.portal, 'urbaneditor')
+        parcel_1 = api.content.create(
+            container=parcelling, type='Parcel', id='parcel1',
+            division=u'A', section=u'B', radical=u'6', exposant=u'D'
+        )
+        self.assertEquals(parcelling.get_parcels(), [parcel_1])
+
 
 class TestParcelling(unittest.TestCase):
 
