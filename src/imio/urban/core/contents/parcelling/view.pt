@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+
+<body>
+<metal:contentcore fill-slot="content-core">
+
+    <metal:contentcore_macro define-macro="content-core"
+           tal:define="portal_type python:context.getPortalTypeName().lower().replace(' ', '_');
+                       base_macros context/base/macros;
+                       view_template python:'%s_view' % portal_type;
+                       view_macros python:path('context/%s/macros|nothing' % view_template);
+                       body_macro view_macros/body | body_macro | base_macros/body;
+                       errors python:request.get('errors', {})">
+
+        <tal:block repeat="widget view/widgets/values">
+            <tal:block tal:condition="python:widget.__name__ not in ('IBasic.title', 'IBasic.description', 'title', 'description',)">
+                <tal:widget tal:replace="structure widget/@@ploneform-render-widget"/>
+            </tal:block>
+        </tal:block>
+
+        <fieldset tal:repeat="group view/groups"
+                  tal:attributes="id python:''.join((group.prefix, 'groups.', group.__name__)).replace('.', '-')">
+            <legend tal:content="group/label" />
+            <tal:block tal:repeat="widget group/widgets/values">
+                <tal:widget tal:replace="structure widget/@@ploneform-render-widget"/>
+            </tal:block>
+        </fieldset>
+
+    <fieldset style="margin-right:49%;"><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
+        <div>
+            <div metal:use-macro="here/@@globalmacros/urbanParcelsMacro" />
+        </div>
+    </fieldset>
+
+    </metal:contentcore_macro>
+</metal:contentcore>
+</body>
+</html>
