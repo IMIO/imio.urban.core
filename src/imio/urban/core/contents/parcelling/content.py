@@ -3,7 +3,7 @@
 from imio.urban.core import _
 
 from plone.app import textfield
-from plone.dexterity.content import Item
+from plone.dexterity.content import Container
 from plone.supermodel import model
 
 from zope import schema
@@ -57,7 +57,7 @@ class IParcelling(model.Schema):
 
 
 @implementer(IParcelling)
-class Parcelling(Item):
+class Parcelling(Container):
     """
     Parcelling class.
     """
@@ -100,5 +100,25 @@ class Parcelling(Item):
         if approval_date:
             title = u'%s - %s' % (title, approval_date.strftime('%d/%m/%Y'))
 
+        parcel_baserefs = list(
+            set(
+                [u'"{} {} {}"'.format(prc.getDivision(), prc.getSection(), prc.getRadical())
+                for prc in self.get_parcels()]
+            )
+        )
+        refs = u''
+        if parcel_baserefs:
+            refs = parcel_baserefs[0]
+            for ref in parcel_baserefs[1:]:
+                refs = u'%s, %s' % (refs, ref)
+        if refs:
+            title = u'%s - %s' % (title, refs)
+
         title = u'%s)' % title
         return title.encode('utf-8')
+
+    def get_parcels(self):
+        """
+           Return the list of parcels for the Licence
+        """
+        return [obj for obj in self.objectValues() if obj.portal_type == 'Parcel']
