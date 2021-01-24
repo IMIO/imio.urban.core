@@ -18,9 +18,9 @@
    <element value="Parcel"/>
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">view</property>
+ <property name="default_view">parcellingview</property>
  <property name="view_methods">
-  <element value="view"/>
+  <element value="parcellingview"/>
  </property>
  <property name="default_view_fallback">False</property>
  <property name="add_permission">cmf.AddPortalContent</property>

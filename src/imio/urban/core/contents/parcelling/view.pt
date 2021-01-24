@@ -4,9 +4,9 @@
       i18n:domain="urban">
 
 <body>
-<metal:contentcore fill-slot="content-core">
+<metal:main fill-slot="main">
 
-    <metal:contentcore_macro define-macro="content-core"
+    <metal:main_macro define-macro="main"
            tal:define="portal_type python:context.getPortalTypeName().lower().replace(' ', '_');
                        base_macros context/base/macros;
                        view_template python:'%s_view' % portal_type;
@@ -34,7 +34,7 @@
         </div>
     </fieldset>
 
-    </metal:contentcore_macro>
-</metal:contentcore>
+    </metal:main_macro>
+</metal:main>
 </body>
 </html>
