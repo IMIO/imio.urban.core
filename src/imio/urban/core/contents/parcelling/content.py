@@ -119,6 +119,12 @@ class Parcelling(Container):
 
     def get_parcels(self):
         """
-           Return the list of parcels for the Licence
+        Return the list of parcels for the Licence.
         """
         return [obj for obj in self.objectValues() if obj.portal_type == 'Parcel']
+
+    def getParcels(self):
+        """
+        [DX] backward compatiblity with searchparcels view [DX]
+        """
+        return self.get_parcels()

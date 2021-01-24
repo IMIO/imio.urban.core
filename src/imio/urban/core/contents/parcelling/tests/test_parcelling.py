@@ -7,9 +7,11 @@ from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
 from datetime import date
 
 from imio.urban.core.testing import IntegrationTestCase
+from imio.urban.core.tests.helpers import BrowserTestCase
 
 from plone import api
 from plone.app.testing import login
+from plone.testing.z2 import Browser
 
 import transaction
 import unittest2 as unittest
@@ -36,9 +38,13 @@ class TestParcellingIntegration(IntegrationTestCase):
 
     layer = URBAN_TESTS_CONFIG
 
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.urban = self.portal.urban
+        self.parcellings = self.portal.urban.parcellings.objectValues()
+
     def test_default_parcellings_created(self):
-        portal = self.layer['portal']
-        parcellings = portal.urban.parcellings.objectValues()
+        parcellings = self.parcellings
         self.assertEquals(len(parcellings), 1)
         parcelling = parcellings[0]
         self.assertEquals(parcelling.portal_type, 'Parcelling')
@@ -50,44 +56,37 @@ class TestParcellingIntegration(IntegrationTestCase):
         self.assertEquals(parcelling.numberOfParcels, 10)
 
     def test_parcelling_allowed_types(self):
-        portal = self.layer['portal']
-        parcellings = portal.urban.parcellings.objectValues()
+        parcellings = self.parcellings
         self.assertEquals(len(parcellings), 1)
         parcelling = parcellings[0]
         login(self.portal, 'urbaneditor')
         self.assertEquals(parcelling.allowedContentTypes()[0].getId(), 'Parcel')
 
     def test_parcelling_title(self):
-        portal = self.layer['portal']
-        parcellings = portal.urban.parcellings.objectValues()
+        parcellings = self.parcellings
         self.assertEquals(len(parcellings), 1)
         parcelling = parcellings[0]
         self.assertEquals(parcelling.Title(), 'Lotissement 1 (André Ledieu - 01/01/2005 - 12/01/2005)')
 
-    def test_parcelling_title_with_parcels(self):
-        portal = self.layer['portal']
-        parcellings = portal.urban.parcellings.objectValues()
-        self.assertEquals(len(parcellings), 1)
-        parcelling = parcellings[0]
-        self.assertEquals(parcelling.Title(), 'Lotissement 1 (André Ledieu - 01/01/2005 - 12/01/2005)')
-        login(self.portal, 'urbaneditor')
-        parcel_1 = api.content.create(
-            container=parcelling, type='Parcel', id='parcel1',
-            division=u'A', section=u'B', radical=u'6', exposant=u'D'
-        )
-        self.assertIn("A B 6", parcelling.Title())
 
-    def test_get_parcels_method(self):
-        portal = self.layer['portal']
-        parcellings = portal.urban.parcellings.objectValues()
-        self.assertEquals(len(parcellings), 1)
-        parcelling = parcellings[0]
-        login(self.portal, 'urbaneditor')
-        parcel_1 = api.content.create(
-            container=parcelling, type='Parcel', id='parcel1',
-            division=u'A', section=u'B', radical=u'6', exposant=u'D'
-        )
-        self.assertEquals(parcelling.get_parcels(), [parcel_1])
+class TestParcellingView(BrowserTestCase):
+
+    layer = URBAN_TESTS_CONFIG
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.urban = self.portal.urban
+        self.parcellings = self.portal.urban.parcellings.objectValues()
+        self.parcelling = self.portal.urban.parcellings.objectValues()[0]
+        self.browser = Browser(self.portal)
+        default_user = self.layer.default_user
+        default_password = self.layer.default_password
+        self.browserLogin(default_user, default_password)
+
+    def test_parcels_listing_visible_on_parcelling_view(self):
+        self.browser.open(self.parcelling.absolute_url())
+        contents = self.browser.contents
+        self.assertIn('Parcelle(s)', contents, msg='parcels listing is not visible')
 
 
 class TestParcelling(unittest.TestCase):
@@ -115,6 +114,25 @@ class TestParcelling(unittest.TestCase):
     def test_parcelling_referenceable_on_licence(self):
         licence = self.licence
         self.assertFalse(licence.getParcellings())
-        parcelling = self.portal.urban.parcellings.p1
+        parcelling = self.parcelling
         licence.setParcellings(parcelling)
         self.assertEquals(licence.getParcellings(), parcelling)
+
+    def test_parcelling_title_with_parcels(self):
+        parcelling = self.parcelling
+        self.assertEquals(parcelling.Title(), 'Lotissement 1 (André Ledieu - 01/01/2005 - 12/01/2005)')
+        login(self.portal, 'urbaneditor')
+        parcel_1 = api.content.create(
+            container=parcelling, type='Parcel', id='parcel1',
+            division=u'A', section=u'B', radical=u'6', exposant=u'D'
+        )
+        self.assertIn("A B 6", parcelling.Title())
+
+    def test_get_parcels_method(self):
+        parcelling = self.parcelling
+        login(self.portal, 'urbaneditor')
+        parcel_1 = api.content.create(
+            container=parcelling, type='Parcel', id='parcel1',
+            division=u'A', section=u'B', radical=u'6', exposant=u'D'
+        )
+        self.assertEquals(parcelling.get_parcels(), [parcel_1])
