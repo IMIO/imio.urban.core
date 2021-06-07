@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
 
+from datetime import date, datetime
+
+from plone.app.z3cform.widget import DateWidget
+from plone.autoform import directives as form
+from plone.formwidget.datetime.z3cform.widget import DateWidget as DefautDateWidget
+# lone/formwidget/datetime
 from imio.urban.core import _
 
 from plone.app import textfield
@@ -8,6 +14,11 @@ from plone.supermodel import model
 
 from zope import schema
 from zope.interface import implementer
+
+
+class OldyearDateWidget(DefautDateWidget):
+    years_range = (1960 - date.today().year, 10)
+
 
 
 class IParcelling(model.Schema):
@@ -25,11 +36,13 @@ class IParcelling(model.Schema):
         required=True,
     )
 
+    form.widget('authorizationDate', OldyearDateWidget)
     authorizationDate = schema.Date(
         title=_(u'urban_label_authorizationDate'),
         required=False,
     )
 
+    form.widget('approvalDate', OldyearDateWidget)
     approvalDate = schema.Date(
         title=_(u'urban_label_approvalDate'),
         required=False,
