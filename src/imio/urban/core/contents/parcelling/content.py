@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from datetime import date, datetime
+from datetime import date
 
-from plone.app.z3cform.widget import DateWidget
 from plone.autoform import directives as form
 from plone.formwidget.datetime.z3cform.widget import DateWidget as DefautDateWidget
-# lone/formwidget/datetime
 from imio.urban.core import _
 
 from plone.app import textfield
@@ -18,7 +16,6 @@ from zope.interface import implementer
 
 class OldyearDateWidget(DefautDateWidget):
     years_range = (1960 - date.today().year, 10)
-
 
 
 class IParcelling(model.Schema):
@@ -116,7 +113,7 @@ class Parcelling(Container):
         parcel_baserefs = list(
             set(
                 [u'"{} {} {}"'.format(prc.getDivision(), prc.getSection(), prc.getRadical())
-                for prc in self.get_parcels()]
+                 for prc in self.get_parcels()]
             )
         )
         refs = u''
