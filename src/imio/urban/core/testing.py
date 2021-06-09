@@ -13,6 +13,8 @@ from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
 from plone.testing import z2
 
+from zope.configuration import xmlconfig
+
 import unittest2 as unittest
 
 import imio.urban.core
@@ -30,6 +32,11 @@ class ImioUrbanCoreLayer(PloneSandboxLayer):
         # Load ZCML
         self.loadZCML(package=imio.urban.core,
                       name='testing.zcml')
+        xmlconfig.includeOverrides(
+            configurationContext,
+            'overrides.zcml',
+            package=imio.urban.core
+        )
         for p in self.products:
             z2.installProduct(app, p)
 

@@ -1,0 +1,12 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           i18n_domain="imio.urban.core">
+
+    <configure package="plone.formwidget.datetime">
+        <adapter
+            factory="imio.urban.core.browser.widgets.UrbanDateFieldWidget"
+            provides="z3c.form.interfaces.IFieldWidget"
+            for="plone.formwidget.datetime.z3cform.interfaces.IDateField
+                 z3c.form.interfaces.IFormLayer" />
+    </configure>
+
+</configure>
