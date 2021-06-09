@@ -88,6 +88,11 @@ class TestParcellingView(BrowserTestCase):
         contents = self.browser.contents
         self.assertIn('Parcelle(s)', contents, msg='parcels listing is not visible')
 
+    def test_date_widget_min_value_1960(self):
+        self.browser.open(self.parcelling.absolute_url() + '/edit')
+        contents = self.browser.contents
+        self.assertIn('<option value="1960">1960</option>', contents, msg='The minimum date value is not 1960')
+
 
 class TestParcelling(unittest.TestCase):
 
@@ -136,3 +141,4 @@ class TestParcelling(unittest.TestCase):
             division=u'A', section=u'B', radical=u'6', exposant=u'D'
         )
         self.assertEquals(parcelling.get_parcels(), [parcel_1])
+
