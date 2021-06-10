@@ -153,8 +153,7 @@ class EventKeyDates(EventConfigVocabulary):
             if is_date_field:
                 fieldname = field.getName()
                 enabled = fieldname in enabled_fields
-                base_date = fieldname == 'eventDate'
-                if getattr(field, 'optional', False) and enabled or base_date:
+                if getattr(field, 'optional', False) and enabled or not hasattr(field, 'optional'):
                     date_fields.append(
                         (
                             fieldname,

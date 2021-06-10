@@ -103,7 +103,7 @@ class Parcelling(Container):
         parcel_baserefs = list(
             set(
                 [u'"{} {} {}"'.format(prc.getDivision(), prc.getSection(), prc.getRadical())
-                for prc in self.get_parcels()]
+                 for prc in self.get_parcels()]
             )
         )
         refs = u''
