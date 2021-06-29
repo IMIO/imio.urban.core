@@ -130,7 +130,7 @@ class EventConfig(Container):
         return self.showTitle or False
 
     def getEventDateLabel(self):
-        return self.eventDateLabel or u''
+        return self.eventDateLabel or u'Date'
 
     def getEventPortalType(self):
         return self.eventPortalType or u''
