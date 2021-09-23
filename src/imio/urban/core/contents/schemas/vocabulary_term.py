@@ -43,3 +43,6 @@ class VocabularyTerm(object):
                 val = val.decode('utf8')
             dict_[field_name] = val
         return dict_
+
+    def __str__(self):
+        return self.title
