@@ -107,6 +107,9 @@ class OpinionEventConfig(EventConfig, VocabularyTerm):
     OpinionEventConfig class
     """
 
+    def __str__(self):
+        return self.get_abbreviation() or self.title
+
     def get_abbreviation(self):
         return self.abbreviation or u''
 

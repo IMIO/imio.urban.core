@@ -55,7 +55,12 @@ class TestUrbanEventTypes(unittest.TestCase):
         eventconfigs_folder = tool.buildlicence.eventconfigs
 
         with api.env.adopt_roles(['Manager']):
-            term_id = eventconfigs_folder.invokeFactory('OpinionEventConfig', id='voodoo', title="Demande d'avis (Vood00)", abbreviation='Vood00')
+            term_id = eventconfigs_folder.invokeFactory(
+                'OpinionEventConfig',
+                id='voodoo',
+                title="Demande d'avis (Vood00)",
+                abbreviation='Vood00'
+            )
             voc_cache = tool.restrictedTraverse('urban_vocabulary_cache')
             voc_cache.update_procedure_all_vocabulary_cache(tool.buildlicence)
         term = getattr(tool.buildlicence.eventconfigs, term_id)
@@ -65,6 +70,29 @@ class TestUrbanEventTypes(unittest.TestCase):
         field_voc = solicitOpinions_field.vocabulary.getDisplayList(self.licence)
 
         self.assertIn(expected_voc_term, field_voc.items())
+
+    def test_OpinionEventConfig__str__(self):
+        """
+        __str__ should return the OpinionEventConfig abbreviation (or title if empty)
+        """
+        tool = api.portal.get_tool('portal_urban')
+        eventconfigs_folder = tool.buildlicence.eventconfigs
+
+        abbreviation = 'Vood00'
+        with api.env.adopt_roles(['Manager']):
+            term_id = eventconfigs_folder.invokeFactory(
+                'OpinionEventConfig',
+                id='voodoo',
+                title="Demande d'avis (Vood00)",
+                abbreviation=abbreviation
+            )
+        term = getattr(tool.buildlicence.eventconfigs, term_id)
+        msg = "__str__ of a opinioneventconfig should be its abbreviation: {} != {}"
+        self.assertEquals(str(term), abbreviation, msg.format(str(term), abbreviation))
+
+        term.abbreviation = ''
+        msg = "__str__ of a opinioneventconfig should be its title if no abbreviation: {} != {}"
+        self.assertEquals(str(term), term.title, msg.format(str(term), term.title))
 
     def testInquiryWithOpinionRequestIsLinkedToItsUrbanEventOpinionRequest(self):
         """
