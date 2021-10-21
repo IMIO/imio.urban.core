@@ -14,3 +14,10 @@ class TestVocabularyTerm(IntegrationTestCase):
         vocterm.title = expected
         msg = 'vocterms __str__ should return their title: {} != {}'
         self.assertEquals(str(vocterm), expected, msg.format(str(vocterm), expected))
+
+    def test_vocabularyterm__unicode__(self):
+        vocterm = VocabularyTerm()
+        vocterm.title = 'Yoléà'
+        expected = u'Yoléà'
+        msg = u'vocterms __unicode__ should return their title: {} != {}'
+        self.assertEquals(unicode(vocterm), expected, msg.format(unicode(vocterm), expected))

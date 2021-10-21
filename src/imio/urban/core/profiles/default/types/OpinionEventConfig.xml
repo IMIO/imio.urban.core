@@ -27,7 +27,6 @@
  <property name="klass">imio.urban.core.contents.opinioneventconfig.OpinionEventConfig</property>
  <property name="behaviors">
   <element value="plone.app.lockingbehavior.behaviors.ILocking" />
-  <element value="plone.app.dexterity.behaviors.metadata.IBasic" />
   <element value="plone.app.content.interfaces.INameFromTitle" />
   <!-- TO REMOVE AFTER UrbanEvent MIGRATED TO DX-->
   <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />

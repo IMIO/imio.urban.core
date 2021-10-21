@@ -94,6 +94,29 @@ class TestUrbanEventTypes(unittest.TestCase):
         msg = "__str__ of a opinioneventconfig should be its title if no abbreviation: {} != {}"
         self.assertEquals(str(term), term.title, msg.format(str(term), term.title))
 
+    def test_OpinionEventConfig__unicode__(self):
+        """
+        __unicode__ should return the OpinionEventConfig abbreviation (or title if empty)
+        """
+        tool = api.portal.get_tool('portal_urban')
+        eventconfigs_folder = tool.buildlicence.eventconfigs
+
+        abbreviation = 'Vood00'
+        with api.env.adopt_roles(['Manager']):
+            term_id = eventconfigs_folder.invokeFactory(
+                'OpinionEventConfig',
+                id='voodoo',
+                title="Demande d'avis (Vood00)",
+                abbreviation=abbreviation
+            )
+        term = getattr(tool.buildlicence.eventconfigs, term_id)
+        msg = u"__unicode__ of a opinioneventconfig should be its abbreviation: {} != {}"
+        self.assertEquals(unicode(term), abbreviation, msg.format(unicode(term), abbreviation))
+
+        term.abbreviation = ''
+        msg = u"__unicode__ of a opinioneventconfig should be its title if no abbreviation: {} != {}"
+        self.assertEquals(unicode(term), term.title, msg.format(unicode(term), term.title))
+
     def testInquiryWithOpinionRequestIsLinkedToItsUrbanEventOpinionRequest(self):
         """
         if there is an inquiry with an opinion request and that its corresponding UrbanEventOpinionRequest

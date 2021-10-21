@@ -23,7 +23,7 @@ class IOpinionEventConfig(IEventConfig):
     OpinionEventConfig zope schema.
     """
 
-    form.order_after(abbreviation='IBasic.description')
+    form.order_after(abbreviation='description')
     abbreviation = schema.TextLine(
         title=_(u'abbreviation'),
         required=False,
@@ -80,7 +80,7 @@ class IOpinionEventConfig(IEventConfig):
     internal_service = schema.Choice(
         title=_(u'internal_service'),
         vocabulary='urban.vocabularies.internal_services',
-        required=True,
+        required=False,
         default='UrbanEvent',
     )
 

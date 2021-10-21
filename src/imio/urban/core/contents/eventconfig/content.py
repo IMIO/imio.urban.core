@@ -6,6 +6,8 @@ from collective.z3cform.datagridfield import DictRow
 from imio.urban.core import _
 
 from plone import api
+from plone.app import textfield
+from plone.app.dexterity import PloneMessageFactory as _PMF
 from plone.autoform import directives as form
 from plone.dexterity.content import Container
 from plone.supermodel import model
@@ -54,17 +56,31 @@ class IEventConfig(model.Schema):
     EventConfig zope schema.
     """
 
-    form.order_after(showTitle='IBasic.title')
+    title = schema.TextLine(
+        title=_PMF(u'label_title', default=u'Title'),
+        required=True
+    )
+
     showTitle = schema.Bool(
         title=_(u'showTitle'),
         default=False,
         required=False,
     )
 
-    form.order_after(eventDateLabel='showTitle')
     eventDateLabel = schema.TextLine(
         title=_(u'eventDateLabel'),
         required=False,
+    )
+
+    description = textfield.RichText(
+        title=_PMF(u'label_description', default=u'Summary'),
+        description=_PMF(
+            u'help_description',
+            default=u'Used in item listings and search results.'
+        ),
+        required=False,
+        default=textfield.RichTextValue(''),
+        missing_value=u'',
     )
 
     eventPortalType = schema.Choice(
@@ -125,6 +141,13 @@ class EventConfig(Container):
     """
     EventConfig class
     """
+
+    def Description(self):
+        if self.description:
+            if type(self.description) in (str, unicode):
+                self.desription = textfield.RichTextValue(self.description)
+            return self.description.raw
+        return textfield.RichTextValue('').raw
 
     def getShowTitle(self):
         return self.showTitle or False
@@ -192,7 +215,8 @@ class EventConfig(Container):
             try:
                 res = Expression(TALCondition)(ctx)
             except Exception, e:
-                logger.warn("The condition '%s' defined for element at '%s' is wrong!  Message is : %s" % (TALCondition, obj.absolute_url(), e))
+                logger.warn("The condition '%s' defined for element at '%s' is wrong!\
+Message is : %s" % (TALCondition, obj.absolute_url(), e))
                 res = False
         return res
 

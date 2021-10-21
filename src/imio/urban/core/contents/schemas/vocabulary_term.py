@@ -45,4 +45,9 @@ class VocabularyTerm(object):
         return dict_
 
     def __str__(self):
+        if type(self.title) is unicode:
+            return self.title.encode('utf-8')
         return self.title
+
+    def __unicode__(self):
+        return self.__str__().decode('utf-8')
