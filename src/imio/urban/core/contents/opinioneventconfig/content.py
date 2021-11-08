@@ -109,12 +109,16 @@ class OpinionEventConfig(EventConfig, VocabularyTerm):
 
     def __str__(self):
         if self.get_abbreviation():
-            return self.get_abbreviation().encode('utf-8')
+            if type(self.get_abbreviation()) is unicode:
+                return self.get_abbreviation().encode('utf-8')
+            return self.get_abbreviation()
         return super(EventConfig, self).__str__()
 
     def __unicode__(self):
         if self.get_abbreviation():
-            return self.get_abbreviation()
+            if type(self.get_abbreviation()) is unicode:
+                return self.get_abbreviation()
+            return self.get_abbreviation().decode('utf-8')
         return super(EventConfig, self).__unicode__()
 
     def get_abbreviation(self):

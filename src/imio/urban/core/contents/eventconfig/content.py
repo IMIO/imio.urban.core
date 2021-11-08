@@ -144,8 +144,6 @@ class EventConfig(Container):
 
     def Description(self):
         if self.description:
-            if type(self.description) in (str, unicode):
-                self.desription = textfield.RichTextValue(self.description)
             return self.description.raw
         return textfield.RichTextValue('').raw
 
