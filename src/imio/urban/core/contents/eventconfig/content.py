@@ -147,6 +147,9 @@ class EventConfig(Container):
             return self.description.raw
         return textfield.RichTextValue('').raw
 
+    def SearchableText(self):
+        return '{} {}'.format(self.Title(), self.Description().encode('utf-8'))
+
     def getShowTitle(self):
         return self.showTitle or False
 
