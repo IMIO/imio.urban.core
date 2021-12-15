@@ -8,6 +8,7 @@ from plone.dexterity.content import Item
 from plone.supermodel import model
 
 from Products.urban import services
+from Products.ZCatalog.Lazy import LazyMap
 
 from z3c.form.browser.select import SelectWidget
 
@@ -177,7 +178,7 @@ class Parcel(Item):
     def getOutdated(self):
         return self.outdated
 
-    def getRelatedLicences(self, licence_type=''):
+    def getRelatedLicences(self, licence_type='', with_historic=False):
         catalog = api.portal.get_tool('portal_catalog')
         licence = self.aq_parent
         capakey = self.get_capakey()
@@ -186,6 +187,16 @@ class Parcel(Item):
             brains = catalog(portal_type=licence_type, parcelInfosIndex=capakey)
         else:
             brains = catalog(parcelInfosIndex=capakey)
+        if with_historic:
+            brains_historic = LazyMap("", "")
+            historic = self.get_historic()
+            historic_capakeys = historic.get_all_capakeys()
+            for historic_capakey in historic_capakeys:
+                if licence_type:
+                    brains_historic += catalog(portal_type=licence_type, parcelInfosIndex=historic_capakey)
+                else:
+                    brains_historic += catalog(parcelInfosIndex=historic_capakey)
+            brains = brains + brains_historic
         return [brain for brain in brains if brain.id != licence.id]
 
     def getCSSClass(self):
