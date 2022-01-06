@@ -144,7 +144,9 @@ class EventConfig(Container):
 
     def Description(self):
         if self.description:
-            return self.description.raw
+            raw = self.description.raw
+            if type(raw) is unicode:
+                return raw.encode('utf-8')
         return textfield.RichTextValue('').raw
 
     def getShowTitle(self):
