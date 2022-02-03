@@ -8,7 +8,6 @@ from plone.dexterity.content import Item
 from plone.supermodel import model
 
 from Products.urban import services
-from Products.ZCatalog.Lazy import LazyMap
 
 from z3c.form.browser.select import SelectWidget
 
