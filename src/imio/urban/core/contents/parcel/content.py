@@ -177,15 +177,24 @@ class Parcel(Item):
     def getOutdated(self):
         return self.outdated
 
-    def getRelatedLicences(self, licence_type=''):
+    def getRelatedLicences(self, licence_type='', with_historic=False):
         catalog = api.portal.get_tool('portal_catalog')
         licence = self.aq_parent
         capakey = self.get_capakey()
         brains = []
-        if licence_type:
-            brains = catalog(portal_type=licence_type, parcelInfosIndex=capakey)
-        else:
-            brains = catalog(parcelInfosIndex=capakey)
+        if not with_historic:
+            if licence_type:
+                brains = catalog(portal_type=licence_type, parcelInfosIndex=capakey)
+            else:
+                brains = catalog(parcelInfosIndex=capakey)
+        elif with_historic:
+            historic = self.get_historic()
+            query_capakeys = historic.get_all_capakeys()
+            query_capakeys.append(capakey)
+            if licence_type:
+                brains = catalog(portal_type=licence_type, parcelInfosIndex=query_capakeys)
+            else:
+                brains = catalog(parcelInfosIndex=query_capakeys)
         return [brain for brain in brains if brain.id != licence.id]
 
     def getCSSClass(self):
