@@ -144,6 +144,8 @@ class EventConfig(Container):
 
     def Description(self):
         if self.description:
+            if type(self.description) is unicode:
+                return self.description.encode('utf-8')
             raw = self.description.raw
             if type(raw) is unicode:
                 return raw.encode('utf-8')
