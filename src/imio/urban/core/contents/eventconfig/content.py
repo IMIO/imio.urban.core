@@ -90,7 +90,7 @@ class IEventConfig(model.Schema):
         default='UrbanEvent',
     )
 
-    form.widget('activatedFields', OrderedSelectWidget)
+    form.widget('activatedFields', OrderedSelectWidget, size=20)
     activatedFields = schema.Tuple(
         title=_(u'activatedFields'),
         value_type=schema.Choice(
@@ -99,7 +99,7 @@ class IEventConfig(model.Schema):
         required=True,
     )
 
-    form.widget('eventType', OrderedSelectWidget)
+    form.widget('eventType', OrderedSelectWidget, size=20)
     eventType = schema.Tuple(
         title=_(u'eventType'),
         value_type=schema.Choice(
