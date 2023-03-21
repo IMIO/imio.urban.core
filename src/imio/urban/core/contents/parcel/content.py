@@ -88,6 +88,8 @@ class Parcel(Item):
         section = self.getSection()
         radical = self.getRadical()
         bis = self.getBis()
+        if len(bis) == 2 and bis.startswith('0'):
+            bis = bis[1]
         exposant = self.getExposant()
         puissance = self.getPuissance()
         title = u'{} {} {} {} {} {}'.format(division, section, radical, bis, exposant, puissance)
