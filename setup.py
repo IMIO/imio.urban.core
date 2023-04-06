@@ -5,16 +5,11 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-long_description = (
-    open('README.rst').read()
-    + '\n' +
-    'Contributors\n'
-    '============\n'
-    + '\n' +
-    open('CONTRIBUTORS.rst').read()
-    + '\n' +
-    open('CHANGES.rst').read()
-    + '\n')
+long_description = '\n\n'.join([
+    open('README.rst').read(),
+    open('CONTRIBUTORS.rst').read(),
+    open('CHANGES.rst').read(),
+])
 
 
 setup(
@@ -29,6 +24,7 @@ setup(
         "Framework :: Plone :: 4.3",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7",
+        "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
     ],
     keywords='urban imio',
     author='Simon Declourt',
