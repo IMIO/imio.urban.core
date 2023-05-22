@@ -22,6 +22,7 @@
 
     <include file="import_steps.zcml" />
     <include file="profiles.zcml" />
+    <include file="upgrades.zcml" />
 
     <genericsetup:importStep
         name="imio.urban.core-postInstall"

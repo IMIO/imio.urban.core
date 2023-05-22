@@ -1,0 +1,15 @@
+
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
+
+  <genericsetup:upgradeStep
+    source="1"
+    destination="2"
+    title="Add files to allow type of parcelling"
+    description=""
+    profile="imio.urban.core:default"
+    handler=".upgrades.update_types"
+    />
+
+  </configure>

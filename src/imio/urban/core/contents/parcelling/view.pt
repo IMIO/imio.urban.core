@@ -34,6 +34,17 @@
         </div>
     </fieldset>
 
+    <fieldset>
+        <legend i18n:translate="">Attachments</legend>
+        <div class="clear">
+            <tal:listing content="structure view/renderAttachmentsListing" />
+        </div>
+
+        <a tal:condition="view/mayAddAttachment" href="@@quick_upload?typeupload=File" class="link-overlay-urban-annex link-overlay" style="cursor: pointer;">
+            <img title="Ajouter plusieurs annexes" src="icon_add_big.png">
+        </a>
+    </fieldset>
+
     </metal:main_macro>
 </metal:main>
 </body>
