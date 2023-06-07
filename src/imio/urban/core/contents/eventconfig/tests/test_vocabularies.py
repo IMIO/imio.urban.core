@@ -77,6 +77,7 @@ class TestInstall(IntegrationTestCase):
             'UrbanEvent',
             'UrbanEventInspectionReport',
             'UrbanEventFollowUp',
+            'UrbanEventCollege',
         ])
         self.assertEqual(set(voc.by_value), expected_types)
 
