@@ -5,7 +5,8 @@ Changelog
 0.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Add attachment to parceling type [SUP-19414]
+  [jchandelle]
 
 
 0.1 (2023-04-06)
