@@ -81,7 +81,6 @@ class IOpinionEventConfig(IEventConfig):
         title=_(u'internal_service'),
         vocabulary='urban.vocabularies.internal_services',
         required=False,
-        default='UrbanEvent',
     )
 
     form.widget('externalDirections', OrderedSelectWidget)

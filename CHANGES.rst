@@ -5,6 +5,9 @@ Changelog
 0.2 (unreleased)
 ----------------
 
+- Fix the default value for internal service [URB-3006]
+  [mpeeters]
+
 - Add attachment to parceling type [SUP-19414]
   [jchandelle]
 
