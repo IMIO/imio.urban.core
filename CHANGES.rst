@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-0.2 (unreleased)
+0.2 (2024-03-13)
 ----------------
 
 - Fix the default value for internal service [URB-3006]
