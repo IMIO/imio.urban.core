@@ -5,7 +5,8 @@ Changelog
 0.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- URB-3005: Do not index description in `SearchableText` for event configs
+  [mpeeters]
 
 
 0.2 (2024-03-13)

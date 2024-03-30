@@ -33,4 +33,9 @@
     provides="zope.schema.interfaces.IVocabularyFactory"
   />
 
+  <adapter
+    name="SearchableText"
+    factory=".content.eventconfig_SearchableText"
+    />
+
 </configure>

@@ -11,6 +11,7 @@ from plone.app.dexterity import PloneMessageFactory as _PMF
 from plone.autoform import directives as form
 from plone.dexterity.content import Container
 from plone.supermodel import model
+from plone.indexer.decorator import indexer
 
 from Products.CMFCore.Expression import Expression
 from Products.PageTemplates.Expressions import getEngine
@@ -231,3 +232,8 @@ Message is : %s" % (TALCondition, obj.absolute_url(), e))
         """
         may_add = licence.mayAddInspectionReportEvent()
         return may_add
+
+
+@indexer(IEventConfig)
+def eventconfig_SearchableText(obj, **kwargs):
+    return obj.Title()
