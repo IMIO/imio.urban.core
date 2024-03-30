@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-0.3 (unreleased)
+0.3 (2024-03-30)
 ----------------
 
 - URB-3005: Do not index description in `SearchableText` for event configs
