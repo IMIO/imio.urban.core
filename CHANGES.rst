@@ -5,7 +5,8 @@ Changelog
 0.4 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- SUP-49339: Fix vacabulary config missing field and method
+  [jchandelle]
 
 
 0.3 (2024-03-30)
