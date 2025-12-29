@@ -20,6 +20,39 @@ class IVocabularyTerm(IUrbanConfigurationValue):
         required=False,
     )
 
+    numbering = schema.TextLine(
+        title=_("Numbering"),
+        description=_("Use this field to add a custom numbering that will be shown in edit forms but not on document render."),
+        required=False,
+        default=u""
+    )
+
+    extraValue = schema.TextLine(
+        title=_("Extravalue"),
+        description=_("This field is made to store extra value if needed."),
+        required=False,
+        default=u""
+    )
+
+    coring_id = schema.TextLine(
+        title=_("CoringId"),
+        description=_("This field is made to store the coring id."),
+        required=False,
+        default=u""
+    )
+
+    startValidity = schema.Date(
+        title=_("StartValidity"),
+        required=False,
+        default=None
+    )
+
+    endValidity = schema.Date(
+        title=_("EndValidity"),
+        required=False,
+        default=None
+    )
+
 
 class VocabularyTerm(object):
     """
@@ -51,3 +84,33 @@ class VocabularyTerm(object):
 
     def __unicode__(self):
         return self.__str__().decode('utf-8')
+
+    def getFormattedDescription(self, linebyline=True, prefix=""):
+        """
+        This method can get the description in different formats
+        """
+        descr = self.description.raw
+        # add prefix only if description isn't empty
+        #    or is different from code like "<p> </p>" ??
+        if descr and prefix:
+            descr = prefix + descr
+        if linebyline:
+            return descr
+        else:
+            # we need to make a single string with everything we have in the HTML description
+            return re.sub(r"<[^>]*?>", " ", descr).replace("  ", " ")
+
+    def getNumbering(self):
+        return self.numbering
+
+    def getExtraValue(self):
+        return self.extraValue
+
+    def getCoring_id(self):
+        return self.coring_id
+
+    def getStartValidity(self):
+        return self.startValidity
+
+    def getEndValidity(self):
+        return self.endValidity
