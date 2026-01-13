@@ -8,6 +8,9 @@ Changelog
 - SUP-49339: Fix vacabulary config missing field and method
   [jchandelle]
 
+- SUP-49912: Fix translation in vocabulaies comming from other package than Product.urban
+  [jchandelle]
+
 
 0.3 (2024-03-30)
 ----------------
