@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-09-29 08:42+0000\n"
+"POT-Creation-Date: 2026-01-13 08:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,13 +22,25 @@ msgstr ""
 msgid "Bis"
 msgstr "Bis"
 
+#: ../contents/schemas/vocabulary_term.py:38
+msgid "CoringId"
+msgstr "Identification carotage"
+
 #: ../contents/parcel/content.py:27
 msgid "Division"
 msgstr "Division"
 
+#: ../contents/schemas/vocabulary_term.py:51
+msgid "EndValidity"
+msgstr "Fin de validité"
+
 #: ../contents/parcel/content.py:48
 msgid "Exposant"
 msgstr "Exposant"
+
+#: ../contents/schemas/vocabulary_term.py:31
+msgid "Extravalue"
+msgstr "Valeur supplémentaire (champ libre)"
 
 #: ../profiles.zcml:22
 msgid "Installs the imio.urban.core add-on."
@@ -37,6 +49,10 @@ msgstr ""
 #: ../contents/parcel/content.py:65
 msgid "Isofficialparcel"
 msgstr "Parcelle officielle"
+
+#: ../contents/schemas/vocabulary_term.py:24
+msgid "Numbering"
+msgstr "Numérotation"
 
 #: ../contents/parcel/content.py:71
 msgid "Outdated"
@@ -58,15 +74,31 @@ msgstr "Radical"
 msgid "Section"
 msgstr "Section"
 
+#: ../contents/schemas/vocabulary_term.py:45
+msgid "StartValidity"
+msgstr "Début de validité"
+
 #: ../testing.zcml:14
 msgid "Steps to ease tests of imio.urban.core"
 msgstr ""
 
-#: ../contents/eventconfig/content.py:111
+#: ../contents/eventconfig/content.py:128
 msgid "TALCondition"
 msgstr "Condition TAL"
 
-#: ../contents/eventconfig/content.py:201
+#: ../contents/schemas/vocabulary_term.py:32
+msgid "This field is made to store extra value if needed."
+msgstr "Ce champ permet de stocker une valeur suplémentaire qui pourra par exemple être utilisée lors de la génération de documents"
+
+#: ../contents/schemas/vocabulary_term.py:39
+msgid "This field is made to store the coring id."
+msgstr "Entrez l'identifiant lié au carotage"
+
+#: ../contents/schemas/vocabulary_term.py:25
+msgid "Use this field to add a custom numbering that will be shown in edit forms but not on document render."
+msgstr "Utilisez ce champ pour numéroter de manière personnalisée les termes de vocabulaire. La numérotation apprait dans les formulaires mais pas dans les doucments générés."
+
+#: ../contents/eventconfig/content.py:228
 msgid "You can not create this UrbanEvent !"
 msgstr "Vous ne pouvez pas créer cet événement!"
 
@@ -74,7 +106,7 @@ msgstr "Vous ne pouvez pas créer cet événement!"
 msgid "abbreviation"
 msgstr "Titre abrégé"
 
-#: ../contents/eventconfig/content.py:79
+#: ../contents/eventconfig/content.py:96
 msgid "activatedFields"
 msgstr "Champ(s) activé(s)"
 
@@ -86,19 +118,19 @@ msgstr "Pays"
 msgid "dispatchInformation"
 msgstr "Informations de dispatch"
 
-#: ../contents/eventconfig/content.py:66
+#: ../contents/eventconfig/content.py:72
 msgid "eventDateLabel"
 msgstr "Renommage du champ 'Date'"
 
-#: ../contents/eventconfig/content.py:71
+#: ../contents/eventconfig/content.py:88
 msgid "eventPortalType"
 msgstr "Type de contenu de l'événement"
 
-#: ../contents/eventconfig/content.py:88
+#: ../contents/eventconfig/content.py:105
 msgid "eventType"
 msgstr "Marqueur/type d'événement"
 
-#: ../contents/opinioneventconfig/content.py:89
+#: ../contents/opinioneventconfig/content.py:88
 msgid "externalDirections"
 msgstr "Directions extérieures concernées"
 
@@ -126,7 +158,7 @@ msgstr "Service interne à la ville"
 msgid "isDefaultValue"
 msgstr "Est une valeur par défaut"
 
-#: ../contents/eventconfig/content.py:96
+#: ../contents/eventconfig/content.py:113
 msgid "isKeyEvent"
 msgstr "Événement clé"
 
@@ -134,7 +166,7 @@ msgstr "Événement clé"
 msgid "is_internal_service"
 msgstr "Réponse via service interne à la ville"
 
-#: ../contents/eventconfig/content.py:103
+#: ../contents/eventconfig/content.py:120
 msgid "keyDates"
 msgstr "Dates clés"
 
@@ -154,11 +186,11 @@ msgstr "Code postal et localité"
 msgid "recipientName"
 msgstr "Nom du destinataire"
 
-#: ../contents/eventconfig/content.py:59
+#: ../contents/eventconfig/content.py:66
 msgid "showTitle"
 msgstr "Édition du titre"
 
-#: ../contents/eventconfig/content.py:117
+#: ../contents/eventconfig/content.py:134
 msgid "textDefaultValues"
 msgstr "Valeurs par défaut des champs de texte"
 

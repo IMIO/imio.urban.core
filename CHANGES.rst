@@ -8,6 +8,8 @@ Changelog
 - SUP-49339: Fix vacabulary config missing field and method
   [jchandelle]
 
+- URBBDC-3205: Add locales for new field
+  [jchandelle]
 
 0.3 (2024-03-30)
 ----------------
