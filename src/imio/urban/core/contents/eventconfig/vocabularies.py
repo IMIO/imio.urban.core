@@ -152,6 +152,7 @@ class EventKeyDates(EventConfigVocabulary):
             is_date_field = field.getType() == 'Products.Archetypes.Field.DateTimeField'
             if is_date_field:
                 fieldname = field.getName()
+                field_translate_domain = getattr(field, "domain", "urban")
                 enabled = fieldname in enabled_fields
                 if getattr(field, 'optional', False) and enabled or not hasattr(field, 'optional'):
                     date_fields.append(
@@ -159,7 +160,7 @@ class EventKeyDates(EventConfigVocabulary):
                             fieldname,
                             translate(
                                 "urban_label_" + fieldname,
-                                'urban',
+                                field_translate_domain,
                                 default=fieldname,
                                 context=context.REQUEST
                             )
@@ -194,13 +195,14 @@ class EventTextFields(EventConfigVocabulary):
         for field in all_fields:
             is_text_field = field.getType() == 'Products.Archetypes.Field.TextField'
             fieldname = field.getName()
+            field_translate_domain = getattr(field, "domain", "urban")
             if is_text_field and fieldname not in exclude:
                 text_fields.append(
                     (
                         fieldname,
                         translate(
                             "urban_label_" + fieldname,
-                            'urban',
+                            field_translate_domain,
                             default=fieldname,
                             context=request
                         )
