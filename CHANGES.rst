@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-0.5 (unreleased)
+0.5 (2026-01-23)
 ----------------
 
 - URBBDC-3205: Add locales for new field
