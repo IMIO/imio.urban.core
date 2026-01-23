@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-0.4 (unreleased)
+0.4 (2026-01-23)
 ----------------
 
 - SUP-49339: Fix vocabulary config missing field and method
