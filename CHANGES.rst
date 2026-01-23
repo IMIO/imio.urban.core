@@ -17,6 +17,8 @@ Changelog
 - SUP-49912: Fix translation in vocabularies coming from other package than Product.urban
   [jchandelle]
 
+- URBBDC-3205: Add locales for new field
+  [jchandelle]
 
 0.3 (2024-03-30)
 ----------------
