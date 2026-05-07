@@ -7,6 +7,8 @@ from imio.actionspanel import ActionsPanelMessageFactory as _
 from imio.actionspanel.interfaces import IContentDeletable
 from imio.actionspanel.utils import unrestrictedRemoveGivenObject
 from imio.helpers.content import uuidsToObjects
+from plone.app.linkintegrity.exceptions import LinkIntegrityNotificationException
+from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
 
 import transaction
 
@@ -48,6 +50,23 @@ class UrbanDeleteGivenUidView(DeleteGivenUidView):
             from OFS.ObjectManager import BeforeDeleteException
             try:
                 unrestrictedRemoveGivenObject(obj)
+            except LinkIntegrityNotificationException:
+                # abort because element was partially removed
+                transaction.abort()
+                breaches = ILinkIntegrityInfo(self.request).getIntegrityBreaches()
+                linked_titles = []
+                for _unused, sources in breaches.items():
+                    for source in sources:
+                        title = source.Title()
+                        if isinstance(title, str):
+                            title = title.decode('utf-8')
+                        linked_titles.append(title)
+                if linked_titles:
+                    warning = u'Attention, cet \xe9l\xe9ment est utilis\xe9 dans les dossiers suivants : {0}'.format(
+                        u', '.join(linked_titles))
+                else:
+                    warning = u'Cet \xe9l\xe9ment est r\xe9f\xe9renc\xe9 par d\'autres objets et ne peut pas \xeatre supprim\xe9.'
+                msg = {'message': warning, 'type': 'error'}
             except BeforeDeleteException, exc:
                 # abort because element was removed
                 transaction.abort()

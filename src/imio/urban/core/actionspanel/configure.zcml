@@ -11,4 +11,12 @@
         layer="imio.actionspanel.interfaces.IActionsPanelLayer"
         permission="zope2.View" />
 
+    <!-- Handle link integrity breaches properly for Contact objects (Architect, Geometrician, Notary...) -->
+    <browser:page
+        for="Products.urban.interfaces.IContact"
+        name="delete_givenuid"
+        class=".views.UrbanDeleteGivenUidView"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        permission="zope2.View" />
+
 </configure>
