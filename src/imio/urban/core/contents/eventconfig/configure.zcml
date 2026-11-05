@@ -33,6 +33,12 @@
     provides="zope.schema.interfaces.IVocabularyFactory"
   />
 
+  <utility
+  component=".vocabularies.NoticeEventTypeFactory"
+    name="urban.vocabularies.notice_event_type"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
   <adapter
     name="SearchableText"
     factory=".content.eventconfig_SearchableText"

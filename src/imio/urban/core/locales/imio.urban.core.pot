@@ -1,10 +1,10 @@
-# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
-# SOME DESCRIPTIVE TITLE.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#--- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+#SOME DESCRIPTIVE TITLE.
+#FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2026-01-13 08:52+0000\n"
+"POT-Creation-Date: 2026-10-07 07:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,14 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: imio.urban.core\n"
 
+#: ../contents/eventconfig/vocabularies.py:230
+msgid "Application deposit"
+msgstr ""
+
+#: ../contents/eventconfig/vocabularies.py:231
+msgid "Application sent to the FT"
+msgstr ""
+
 #: ../profiles.zcml:14
 msgid "Base preinstall profile for imio.urban.core."
 msgstr ""
@@ -25,8 +33,28 @@ msgstr ""
 msgid "Bis"
 msgstr ""
 
+#: ../contents/eventconfig/vocabularies.py:237
+msgid "College decision"
+msgstr ""
+
+#: ../contents/eventconfig/vocabularies.py:234
+msgid "College preliminary opinion"
+msgstr ""
+
+#: ../contents/eventconfig/vocabularies.py:224
+msgid "Complete folder"
+msgstr ""
+
+#: ../contents/eventconfig/vocabularies.py:225
+msgid "Complete folder (modified plans)"
+msgstr ""
+
 #: ../contents/schemas/vocabulary_term.py:38
 msgid "CoringId"
+msgstr ""
+
+#: ../contents/eventconfig/vocabularies.py:238
+msgid "Decision display"
 msgstr ""
 
 #: ../contents/parcel/content.py:27
@@ -41,8 +69,20 @@ msgstr ""
 msgid "Exposant"
 msgstr ""
 
+#: ../contents/eventconfig/vocabularies.py:235
+msgid "Extension"
+msgstr ""
+
 #: ../contents/schemas/vocabulary_term.py:31
 msgid "Extravalue"
+msgstr ""
+
+#: ../contents/eventconfig/vocabularies.py:232
+msgid "Inadmissible folder"
+msgstr ""
+
+#: ../contents/eventconfig/vocabularies.py:233
+msgid "Incomplete folder"
 msgstr ""
 
 #: ../profiles.zcml:22
@@ -51,6 +91,10 @@ msgstr ""
 
 #: ../contents/parcel/content.py:65
 msgid "Isofficialparcel"
+msgstr ""
+
+#: ../contents/eventconfig/vocabularies.py:228
+msgid "Municipal college opinion"
 msgstr ""
 
 #: ../contents/schemas/vocabulary_term.py:24
@@ -63,6 +107,14 @@ msgstr ""
 
 #: ../contents/parcel/content.py:58
 msgid "Partie"
+msgstr ""
+
+#: ../contents/eventconfig/vocabularies.py:227
+msgid "Project announcement"
+msgstr ""
+
+#: ../contents/eventconfig/vocabularies.py:226
+msgid "Public inquiry"
 msgstr ""
 
 #: ../contents/parcel/content.py:53
@@ -85,7 +137,11 @@ msgstr ""
 msgid "Steps to ease tests of imio.urban.core"
 msgstr ""
 
-#: ../contents/eventconfig/content.py:128
+#: ../contents/eventconfig/vocabularies.py:236
+msgid "Summary report"
+msgstr ""
+
+#: ../contents/eventconfig/content.py:137
 msgid "TALCondition"
 msgstr ""
 
@@ -101,7 +157,11 @@ msgstr ""
 msgid "Use this field to add a custom numbering that will be shown in edit forms but not on document render."
 msgstr ""
 
-#: ../contents/eventconfig/content.py:228
+#: ../contents/eventconfig/vocabularies.py:229
+msgid "Walloon region decision"
+msgstr ""
+
+#: ../contents/eventconfig/content.py:250
 msgid "You can not create this UrbanEvent !"
 msgstr ""
 
@@ -109,7 +169,7 @@ msgstr ""
 msgid "abbreviation"
 msgstr ""
 
-#: ../contents/eventconfig/content.py:96
+#: ../contents/eventconfig/content.py:105
 msgid "activatedFields"
 msgstr ""
 
@@ -121,15 +181,15 @@ msgstr ""
 msgid "dispatchInformation"
 msgstr ""
 
-#: ../contents/eventconfig/content.py:72
+#: ../contents/eventconfig/content.py:81
 msgid "eventDateLabel"
 msgstr ""
 
-#: ../contents/eventconfig/content.py:88
+#: ../contents/eventconfig/content.py:97
 msgid "eventPortalType"
 msgstr ""
 
-#: ../contents/eventconfig/content.py:105
+#: ../contents/eventconfig/content.py:114
 msgid "eventType"
 msgstr ""
 
@@ -161,7 +221,7 @@ msgstr ""
 msgid "isDefaultValue"
 msgstr ""
 
-#: ../contents/eventconfig/content.py:113
+#: ../contents/eventconfig/content.py:122
 msgid "isKeyEvent"
 msgstr ""
 
@@ -169,8 +229,22 @@ msgstr ""
 msgid "is_internal_service"
 msgstr ""
 
-#: ../contents/eventconfig/content.py:120
+#: ../contents/eventconfig/content.py:129
 msgid "keyDates"
+msgstr ""
+
+#. Default: "missing required values ${values}"
+#: ../contents/utils.py:117
+msgid "missing_all_required_values"
+msgstr ""
+
+#. Default: "at least one of ${values}"
+#: ../contents/utils.py:126
+msgid "missing_any_required_value"
+msgstr ""
+
+#: ../contents/eventconfig/content.py:150
+msgid "notice_event_type"
 msgstr ""
 
 #: ../actionspanel/views.py:44
@@ -189,11 +263,11 @@ msgstr ""
 msgid "recipientName"
 msgstr ""
 
-#: ../contents/eventconfig/content.py:66
+#: ../contents/eventconfig/content.py:75
 msgid "showTitle"
 msgstr ""
 
-#: ../contents/eventconfig/content.py:134
+#: ../contents/eventconfig/content.py:143
 msgid "textDefaultValues"
 msgstr ""
 
