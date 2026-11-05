@@ -4,6 +4,7 @@ from collective.z3cform.datagridfield import DataGridField
 from collective.z3cform.datagridfield import DictRow
 
 from imio.urban.core import _
+from imio.urban.core.contents.utils import validate_required_values
 
 from plone import api
 from plone.app import textfield
@@ -23,6 +24,8 @@ from zope import interface
 from zope import schema
 from zope.component import getUtility
 from zope.interface import implementer
+from zope.interface import invariant
+
 
 import logging
 logger = logging.getLogger('imio.urban.core: EventConfig')
@@ -135,6 +138,19 @@ class IEventConfig(model.Schema):
         value_type=DictRow(title=u"tablerow", schema=IDefaultTextRowSchema),
         required=False,
     )
+
+    form.write_permission(notice_event_type="cmf.ManagePortal")
+    notice_event_type = schema.Choice(
+        title=_("notice_event_type"),
+        vocabulary="urban.vocabularies.notice_event_type",
+        required=False,
+    )
+
+    @invariant
+    def required_values_validation(data):
+        if "Manager" in api.user.get_roles():
+            return
+        validate_required_values(data)
 
 
 @implementer(IEventConfig)

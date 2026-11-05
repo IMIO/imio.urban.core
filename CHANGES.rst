@@ -5,7 +5,8 @@ Changelog
 0.6 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- URB-3774: Add notice event type and required values validation on EventConfig
+  [jchandelle]
 
 
 0.5 (2026-01-23)

@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
+from imio.urban.core import _
 from imio.urban.core.contents.eventconfig import IEventConfig
 from imio.urban.core.contents.utils import get_portal_type_class
 
 from plone import api
 
-from Products.CMFPlone import PloneMessageFactory as _
+from Products.CMFPlone import PloneMessageFactory
 from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 from Products.urban.UrbanEvent import UrbanEvent
 from Products.urban.interfaces import IEventTypeType
@@ -63,7 +64,7 @@ class EventPortalTypesVocabulary(object):
         for type_id in types_to_check:
             klass = get_portal_type_class(type_id)
             if klass and issubclass(klass, UrbanEvent):
-                terms.append(SimpleTerm(type_id, type_id, _(type_id)))
+                terms.append(SimpleTerm(type_id, type_id, PloneMessageFactory(type_id)))
 
         vocabulary = SimpleVocabulary(terms)
         return vocabulary
@@ -215,3 +216,30 @@ class EventTextFields(EventConfigVocabulary):
 
 
 EventTextFieldsFactory = EventTextFields()
+
+
+class NoticeEventType(EventConfigVocabulary):
+    def __call__(self, context):
+        options = [
+            ("complete_folder", _("Complete folder")),
+            ("complete_folder_modified_plan", _("Complete folder (modified plans)")),
+            ("inquiry", _("Public inquiry")),
+            ("announcement", _("Project announcement")),
+            ("college_opinion", _("Municipal college opinion")),
+            ("spw_decision", _("Walloon region decision")),
+            ("deposit", _("Application deposit")),
+            ("send_FT", _("Application sent to the FT")),
+            ("inacceptable", _("Inadmissible folder")),
+            ("incomplete", _("Incomplete folder")),
+            ("college_preliminary_opinion", _("College preliminary opinion")),
+            ("prorogation", _("Extension")),
+            ("FT_opinion", _("Summary report")),
+            ("college_decision", _("College decision")),
+            ("display_college_decision", _("Decision display")),
+        ]
+        return SimpleVocabulary(
+            [SimpleTerm(value, value, title) for value, title in options]
+        )
+
+
+NoticeEventTypeFactory = NoticeEventType()
